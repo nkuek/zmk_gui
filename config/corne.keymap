@@ -20,10 +20,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp ESCAPE  &kp B  &mt LCTRL L  &mt LEFT_ALT D  &mt LEFT_GUI W           &kp Z        &kp SQT                      &mt RIGHT_GUI F  &mt RIGHT_ALT O  &mt RCTRL U  &kp J     &kp BSPC
-&kp LCTRL   &kp N  &kp R        &kp T           &kp S                    &kp G        &kp Y                        &kp H            &kp A            &kp E        &kp I     &kp SEMI
-&kp LSHFT   &kp Q  &kp X        &kp M           &kp C                    &kp V        &kp K                        &kp P            &kp COMMA        &kp DOT      &kp FSLH  &kp MINUS
-                                &mo 3           &mt LA(LG(LCTRL)) SPACE  &kp ENTER    &mt RC(RG(RIGHT_ALT)) SPACE  &mo 1            &mo 2
+&kp ESCAPE  &kp B  &mt LCTRL L  &mt LEFT_ALT D  &mt LEFT_GUI W  &kp Z                      &kp SQT      &mt RIGHT_GUI F  &mt RIGHT_ALT O  &mt RCTRL U  &kp J     &kp BSPC
+&kp LCTRL   &kp N  &kp R        &kp T           &kp S           &kp G                      &kp Y        &kp H            &kp A            &kp E        &kp I     &kp SEMI
+&kp LSHFT   &kp Q  &kp X        &kp M           &kp C           &kp V                      &kp K        &kp P            &kp COMMA        &kp DOT      &kp FSLH  &kp MINUS
+                                &mo 3           &mo 2           &mt LS(LA(LCTRL)) ENTER    &lt 1 SPACE  &mo 2            &mo 2
             >;
         };
 
@@ -35,10 +35,10 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp GRAVE  &kp N1  &kp N2  &kp N3    &kp N4  &kp N5       &kp N6    &kp N7    &kp N8    &kp N9     &kp N0  &kp BSPC
-&trans     &trans  &trans  &trans    &trans  &trans       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans  &trans
-&kp LSHFT  &trans  &trans  &trans    &trans  &trans       &trans    &trans    &trans    &trans     &trans  &trans
-                           &kp LGUI  &trans  &kp SPACE    &kp RET   &trans    &kp RALT
+&kp GRAVE  &kp N1  &kp N2  &kp N3  &kp N4  &kp N5    &kp N6    &kp N7    &kp N8  &kp N9     &kp N0  &kp BSPC
+&trans     &trans  &trans  &trans  &trans  &trans    &kp LEFT  &kp DOWN  &kp UP  &kp RIGHT  &trans  &trans
+&kp LSHFT  &trans  &trans  &trans  &trans  &trans    &trans    &trans    &trans  &trans     &trans  &trans
+                           &trans  &trans  &trans    &trans    &trans    &trans
             >;
         };
 
@@ -53,7 +53,7 @@
 &kp GRAVE  &kp EXCL  &kp AT     &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET             &kp AMPS      &kp KP_MULTIPLY  &kp LPAR  &kp RPAR      &kp BSPC
 &kp EQUAL  &kp SQT   &kp MINUS  &kp EQUAL  &kp BSPC  &trans       &kp NON_US_BACKSLASH  &kp LS(LPAR)  &kp LBKT         &kp RBKT  &kp LS(RPAR)  &kp RET
 &kp LSHFT  &trans    &trans     &trans     &trans    &trans       &trans                &trans        &trans           &trans    &trans        &trans
-                                &kp LGUI   &trans    &kp SPACE    &kp RET               &trans        &kp RALT
+                                &trans     &trans    &trans       &trans                &trans        &trans
             >;
         };
 
