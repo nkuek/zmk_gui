@@ -9,6 +9,28 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
+    behaviors {
+        Tap_Hold: Tap_Hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TAP_HOLD";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+        };
+
+        Tap_Hold_Layer: Tap_Hold_Layer {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TAP_HOLD_LAYER";
+            bindings = <&mo>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -20,10 +42,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp ESCAPE  &kp B  &mt LCTRL L  &mt LEFT_ALT D  &mt LEFT_GUI W  &kp Z                      &kp SQT      &mt RIGHT_GUI F  &mt RIGHT_ALT O  &mt RCTRL U  &kp J     &kp BSPC
-&kp TAB     &kp N  &kp R        &kp T           &kp S           &kp G                      &kp Y        &kp H            &kp A            &kp E        &kp I     &kp SEMI
-&kp LSHFT   &kp Q  &kp X        &kp M           &kp C           &kp V                      &kp K        &kp P            &kp COMMA        &kp DOT      &kp FSLH  &kp MINUS
-                                &mo 3           &mo 2           &mt LS(LA(LCTRL)) ENTER    &lt 1 SPACE  &mo 2            &mo 2
+&kp ESCAPE  &kp B  &Tap_Hold LCTRL L  &Tap_Hold LEFT_ALT D  &Tap_Hold LEFT_GUI W  &kp Z                            &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J     &kp BSPC
+&kp TAB     &kp N  &kp R              &kp T                 &kp S                 &kp G                            &kp Y                    &kp H                  &kp A                  &kp E              &kp I     &kp SEMI
+&kp LSHFT   &kp Q  &kp X              &kp M                 &kp C                 &kp V                            &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH  &kp MINUS
+                                      &mo 3                 &mo 2                 &Tap_Hold LS(LA(LCTRL)) ENTER    &Tap_Hold_Layer 1 SPACE  &mo 2                  &mo 2
             >;
         };
 
