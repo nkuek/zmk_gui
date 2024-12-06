@@ -21,7 +21,7 @@
 
             bindings = <
 &kp ESCAPE  &kp B  &mt LCTRL L  &mt LEFT_ALT D  &mt LEFT_GUI W  &kp Z                      &kp SQT      &mt RIGHT_GUI F  &mt RIGHT_ALT O  &mt RCTRL U  &kp J     &kp BSPC
-&kp LCTRL   &kp N  &kp R        &kp T           &kp S           &kp G                      &kp Y        &kp H            &kp A            &kp E        &kp I     &kp SEMI
+&kp TAB     &kp N  &kp R        &kp T           &kp S           &kp G                      &kp Y        &kp H            &kp A            &kp E        &kp I     &kp SEMI
 &kp LSHFT   &kp Q  &kp X        &kp M           &kp C           &kp V                      &kp K        &kp P            &kp COMMA        &kp DOT      &kp FSLH  &kp MINUS
                                 &mo 3           &mo 2           &mt LS(LA(LCTRL)) ENTER    &lt 1 SPACE  &mo 2            &mo 2
             >;
