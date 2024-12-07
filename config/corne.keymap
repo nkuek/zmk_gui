@@ -72,10 +72,10 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp GRAVE  &kp EXCL   &kp AT   &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET             &kp AMPS      &kp KP_MULTIPLY  &kp LPAR  &kp RPAR      &kp BSPC
-&trans     &kp EQUAL  &kp SQT  &kp MINUS  &trans    &trans       &kp NON_US_BACKSLASH  &kp LS(LPAR)  &kp LBKT         &kp RBKT  &kp LS(RPAR)  &kp RET
-&kp LSHFT  &trans     &trans   &trans     &trans    &trans       &trans                &trans        &trans           &trans    &trans        &trans
-                               &trans     &trans    &trans       &trans                &trans        &trans
+&kp GRAVE  &kp EXCL   &kp AT   &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET      &kp AMPS      &kp KP_MULTIPLY  &kp LPAR  &kp RPAR      &kp BSPC
+&trans     &kp EQUAL  &kp SQT  &kp MINUS  &trans    &trans       &kp BACKSLASH  &kp LS(LPAR)  &kp LBKT         &kp RBKT  &kp LS(RPAR)  &kp RET
+&kp LSHFT  &trans     &trans   &trans     &trans    &trans       &trans         &trans        &trans           &trans    &trans        &trans
+                               &trans     &trans    &trans       &trans         &trans        &trans
             >;
         };
 
