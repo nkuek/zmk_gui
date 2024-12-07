@@ -45,7 +45,7 @@
 &kp ESCAPE      &kp B  &Tap_Hold LCTRL L  &Tap_Hold LEFT_ALT D  &Tap_Hold LEFT_GUI W  &kp Z                            &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J     &kp BSPC
 &kp TAB         &kp N  &kp R              &kp T                 &kp S                 &kp G                            &kp Y                    &kp H                  &kp A                  &kp E              &kp I     &kp SEMI
 &kp LEFT_SHIFT  &kp Q  &kp X              &kp M                 &kp C                 &kp V                            &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH  &kp MINUS
-                                          &kp LEFT_SHIFT        &mo 2                 &Tap_Hold LS(LA(LCTRL)) SPACE    &Tap_Hold_Layer 1 SPACE  &mo 2                  &mo 3
+                                          &kp LEFT_SHIFT        &mo 2                 &Tap_Hold LS(LA(LCTRL)) BSPC     &Tap_Hold_Layer 1 SPACE  &mo 2                  &mo 3
             >;
         };
 
