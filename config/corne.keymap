@@ -17,7 +17,7 @@
 
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <600>;
+            tapping-term-ms = <300>;
         };
 
         Tap_Hold_Layer: Tap_Hold_Layer {
