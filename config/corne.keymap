@@ -31,6 +31,120 @@
         };
     };
 
+    combos {
+        compatible = "zmk,combos";
+
+        txux_tab_1 {
+            bindings = <&txux_tab_1>;
+            key-positions = <19 1>;
+        };
+
+        txux_tab_2 {
+            bindings = <&tmux_tab_2>;
+            key-positions = <19 2>;
+        };
+
+        txux_tab_3 {
+            bindings = <&txux_tab_3>;
+            key-positions = <19 3>;
+        };
+
+        txux_tab_4 {
+            bindings = <&txux_tab_4>;
+            key-positions = <20 4>;
+        };
+
+        txux_tab_5 {
+            bindings = <&txux_tab_5>;
+            key-positions = <19 5>;
+        };
+
+        txux_tab_6 {
+            bindings = <&txux_tab_6>;
+            key-positions = <6 16>;
+        };
+
+        txux_tab_7 {
+            bindings = <&txux_tab_7>;
+            key-positions = <16 7>;
+        };
+
+        txux_tab_8 {
+            bindings = <&txux_tab_8>;
+            key-positions = <16 8>;
+        };
+
+        txux_tab_9 {
+            bindings = <&txux_tab_9>;
+            key-positions = <16 9>;
+        };
+    };
+
+    macros {
+        txux_tab_1: txux_tab_1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp NUMBER_1>;
+            label = "TXUX_TAB_1";
+        };
+
+        txux_tab_3: txux_tab_3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp NUMBER_3>;
+            label = "TXUX_TAB_3";
+        };
+
+        txux_tab_4: txux_tab_4 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp NUMBER_4>;
+            label = "TXUX_TAB_4";
+        };
+
+        txux_tab_5: txux_tab_5 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp N5>;
+            label = "TXUX_TAB_5";
+        };
+
+        txux_tab_6: txux_tab_6 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp NUMBER_6>;
+            label = "TXUX_TAB_6";
+        };
+
+        txux_tab_7: txux_tab_7 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp N7>;
+            label = "TXUX_TAB_7";
+        };
+
+        txux_tab_8: txux_tab_8 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp N8>;
+            label = "TXUX_TAB_8";
+        };
+
+        txux_tab_9: txux_tab_9 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp N9>;
+            label = "TXUX_TAB_9";
+        };
+
+        tmux_tab_2: tmux_tab_2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(Q) &kp LA(NUMBER_2)>;
+            label = "TMUX_TAB_2";
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
