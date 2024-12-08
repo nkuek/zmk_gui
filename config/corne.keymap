@@ -99,7 +99,7 @@
         tmux_tab_2: tmux_tab_2 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp LC(Q) &kp LA(NUMBER_2)>;
+            bindings = <&kp LC(Q) &kp NUMBER_2>;
         };
 
         tmux_tab_3: tmux_tab_3 {
