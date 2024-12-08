@@ -55,7 +55,7 @@
         go_to_tmux_tab_4 {
             bindings = <&tmux_tab_4>;
             timeout-ms = <50>;
-            key-positions = <20 4>;
+            key-positions = <19 4>;
         };
 
         go_to_tmux_tab_5 {
@@ -67,7 +67,7 @@
         go_to_tmux_tab_6 {
             bindings = <&tmux_tab_6>;
             timeout-ms = <50>;
-            key-positions = <6 16>;
+            key-positions = <16 6>;
         };
 
         go_to_tmux_tab_7 {
