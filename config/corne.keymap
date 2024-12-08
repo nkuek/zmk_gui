@@ -42,10 +42,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp ESCAPE      &kp B  &Tap_Hold LCTRL L  &Tap_Hold LEFT_ALT D  &Tap_Hold LEFT_GUI W  &kp Z                                 &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J     &kp BSPC
-&kp TAB         &kp N  &kp R              &kp T                 &kp S                 &kp G                                 &kp Y                    &kp H                  &kp A                  &kp E              &kp I     &kp SEMI
-&kp LEFT_SHIFT  &kp Q  &kp X              &kp M                 &kp C                 &kp V                                 &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH  &kp MINUS
-                                          &mo 2                 &kp BACKSPACE         &Tap_Hold LS(LA(LCTRL)) LEFT_SHIFT    &Tap_Hold_Layer 1 SPACE  &mo 2                  &mo 3
+&kp ESCAPE      &kp B  &Tap_Hold LCTRL L  &Tap_Hold LEFT_ALT D  &Tap_Hold LEFT_GUI W  &kp Z                                &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J     &kp BSPC
+&kp TAB         &kp N  &kp R              &kp T                 &kp S                 &kp G                                &kp Y                    &kp H                  &kp A                  &kp E              &kp I     &kp SEMI
+&kp LEFT_SHIFT  &kp Q  &kp X              &kp M                 &kp C                 &kp V                                &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH  &kp MINUS
+                                          &mo 2                 &kp LEFT_SHIFT        &Tap_Hold LS(LA(LCTRL)) BACKSPACE    &Tap_Hold_Layer 1 SPACE  &mo 2                  &mo 3
             >;
         };
 
@@ -81,10 +81,10 @@
 
         layer_3 {
             bindings = <
-&trans       &trans        &trans        &trans        &trans        &trans          &trans  &trans  &trans  &trans  &trans      &trans
-&trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &trans  &trans  &trans  &trans  &trans      &trans
-&bootloader  &trans        &trans        &trans        &trans        &trans          &trans  &trans  &trans  &trans  &sys_reset  &bootloader
-                                         &trans        &trans        &trans          &trans  &trans  &trans
+&trans       &trans        &trans        &trans        &trans        &trans              &trans  &trans  &trans  &trans  &trans      &trans
+&trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4        &trans  &trans  &trans  &trans  &trans      &trans
+&bootloader  &trans        &trans        &trans        &trans        &trans              &trans  &trans  &trans  &trans  &sys_reset  &bootloader
+                                         &trans        &trans        &kp C_PLAY_PAUSE    &trans  &trans  &trans
             >;
         };
     };
