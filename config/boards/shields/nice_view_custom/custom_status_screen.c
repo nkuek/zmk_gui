@@ -15,7 +15,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 static struct zmk_widget_bongocat bongocat_widget;
 #else
 static struct zmk_widget_status status_widget;
-static struct zmk_widget_bongocat bongocat_widget;
 #endif
 
 lv_obj_t *zmk_display_status_screen() {
@@ -28,9 +27,6 @@ lv_obj_t *zmk_display_status_screen() {
 #else
     zmk_widget_status_init(&status_widget, screen);
     lv_obj_align(zmk_widget_status_obj(&status_widget), LV_ALIGN_TOP_MID, 0, 0);
-
-    zmk_widget_bongocat_init(&bongocat_widget, screen);
-    lv_obj_align(zmk_widget_bongocat_obj(&bongocat_widget), LV_ALIGN_BOTTOM_MID, 0, 0);
 #endif
 
     return screen;
