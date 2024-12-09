@@ -9,11 +9,16 @@
 #include <zephyr/kernel.h>
 #include <zmk/events/keycode_state_changed.h>
 
+enum bongocat_state {
+    BONGOCAT_STATE_IDLE,
+    BONGOCAT_STATE_TYPING
+};
+
 struct zmk_widget_bongocat {
     sys_snode_t node;
     lv_obj_t *obj;
     lv_obj_t *img;
-    struct bongocat_widget_data {
+    struct {
         enum bongocat_state state;
         uint8_t frame;
         uint32_t last_keypress;

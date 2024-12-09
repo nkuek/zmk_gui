@@ -17,14 +17,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
-enum bongocat_state { BONGOCAT_STATE_IDLE, BONGOCAT_STATE_TYPING };
-
-struct bongocat_widget_data {
-    enum bongocat_state state;
-    uint32_t last_keypress;
-    uint8_t frame;
-};
-
 static void set_frame(struct zmk_widget_bongocat *widget, const lv_img_dsc_t *frame) {
     lv_img_set_src(widget->img, frame);
 }
