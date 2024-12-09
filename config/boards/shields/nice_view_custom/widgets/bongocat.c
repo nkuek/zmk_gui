@@ -5,6 +5,7 @@
 
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <zmk/keycode_state_changed.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
@@ -95,8 +96,7 @@ int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *paren
     return 0;
 }
 
-static void keycode_update_cb(const zmk_event_t *eh) {
-    const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+static void keycode_update_cb(struct zmk_keycode_state_changed *ev) {
     struct zmk_widget_bongocat *widget;
     
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
@@ -106,7 +106,8 @@ static void keycode_update_cb(const zmk_event_t *eh) {
     }
 }
 
-ZMK_LISTENER(widget_bongocat, keycode_update_cb);
+ZMK_DISPLAY_WIDGET_LISTENER(widget_bongocat, struct zmk_keycode_state_changed,
+                           keycode_update_cb, zmk_keycode_state_changed);
 ZMK_SUBSCRIPTION(widget_bongocat, zmk_keycode_state_changed);
 
 lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget) {
