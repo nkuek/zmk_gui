@@ -1,5 +1,6 @@
 #include <zephyr/kernel.h>
 #include <lvgl.h>
+#include <zmk/display.h>
 #include <zmk/event_manager.h>
 #include <zmk/events/wpm_state_changed.h>
 #include <zmk/wpm.h>
