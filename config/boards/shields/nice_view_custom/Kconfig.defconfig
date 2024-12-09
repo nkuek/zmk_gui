@@ -1,24 +1,7 @@
 # Copyright (c) 2023 The ZMK Contributors
 # SPDX-License-Identifier: MIT
 
-if SHIELD_NICE_VIEW_CUSTOM
-config ZMK_DISPLAY
-    default y
-
-config ZMK_DISPLAY_STATUS_SCREEN
-    default y
-
-config ZMK_WIDGET_BATTERY_STATUS
-    default y
-
-config ZMK_WIDGET_OUTPUT_STATUS
-    default y
-
-config ZMK_WIDGET_LAYER_STATUS
-    default y
-
-config NICE_VIEW_WIDGET_STATUS
-    default y
+if SHIELD_NICE_VIEW_CUSTOM || SHIELD_NICE_VIEW_CUSTOM_LEFT || SHIELD_NICE_VIEW_CUSTOM_RIGHT
 
 config LV_Z_VDB_SIZE
     default 100
