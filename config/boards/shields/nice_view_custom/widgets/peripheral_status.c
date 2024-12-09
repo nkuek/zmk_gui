@@ -19,6 +19,10 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
+struct peripheral_status_state {
+    bool connected;
+};
+
 static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
 
@@ -57,6 +61,10 @@ static struct battery_status_state battery_status_get_state(const zmk_event_t *e
     return (struct battery_status_state){
         .level = zmk_battery_state_of_charge()
     };
+}
+
+static struct peripheral_status_state get_state(const zmk_event_t *_eh) {
+    return (struct peripheral_status_state){.connected = zmk_split_bt_peripheral_is_connected()};
 }
 
 static void set_connection_status(struct zmk_widget_status *widget,

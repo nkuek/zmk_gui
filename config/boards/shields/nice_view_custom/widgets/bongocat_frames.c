@@ -9,24 +9,24 @@
 #define LV_ATTRIBUTE_MEM_ALIGN
 #endif
 
-#ifndef LV_ATTRIBUTE_IMG_BONGOCAT-DEFAULT
-#define LV_ATTRIBUTE_IMG_BONGOCAT-DEFAULT
+#ifndef LV_ATTRIBUTE_IMG_BONGOCAT_DEFAULT
+#define LV_ATTRIBUTE_IMG_BONGOCAT_DEFAULT
 #endif
 
-#ifndef LV_ATTRIBUTE_IMG_BONGOCAT-LEFT
-#define LV_ATTRIBUTE_IMG_BONGOCAT-LEFT
+#ifndef LV_ATTRIBUTE_IMG_BONGOCAT_LEFT
+#define LV_ATTRIBUTE_IMG_BONGOCAT_LEFT
 #endif
 
-#ifndef LV_ATTRIBUTE_IMG_BONGOCAT-RIGHT
-#define LV_ATTRIBUTE_IMG_BONGOCAT-RIGHT
+#ifndef LV_ATTRIBUTE_IMG_BONGOCAT_RIGHT
+#define LV_ATTRIBUTE_IMG_BONGOCAT_RIGHT
 #endif
 
-#ifndef LV_ATTRIBUTE_IMG_BONGOCAT-BOTH
-#define LV_ATTRIBUTE_IMG_BONGOCAT-BOTH
+#ifndef LV_ATTRIBUTE_IMG_BONGOCAT_BOTH
+#define LV_ATTRIBUTE_IMG_BONGOCAT_BOTH
 #endif
 
 // idle
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT-DEFAULT uint8_t bongocat-default_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT_DEFAULT uint8_t bongocat_default_map[] = {
   0x00, 0x00, 0x00, 0x00, 	/*Color of index 0*/
   0x17, 0x16, 0x20, 0x84, 	/*Color of index 1*/
 
@@ -102,7 +102,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT-
 };
 
 // left
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT-LEFT uint8_t bongocat-left_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT_LEFT uint8_t bongocat_left_map[] = {
   0x00, 0x00, 0x01, 0x00, 	/*Color of index 0*/
   0x12, 0x10, 0x1b, 0x86, 	/*Color of index 1*/
 
@@ -178,7 +178,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT-
 };
 
 // right
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT-RIGHT uint8_t bongocat-right_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT_RIGHT uint8_t bongocat_right_map[] = {
   0x00, 0x00, 0x01, 0x00, 	/*Color of index 0*/
   0x11, 0x10, 0x1a, 0x88, 	/*Color of index 1*/
 
@@ -255,7 +255,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT-
 
 
 // both
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT-BOTH uint8_t bongocat-both_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT_BOTH uint8_t bongocat_both_map[] = {
   0x00, 0x00, 0x02, 0x01, 	/*Color of index 0*/
   0x0a, 0x08, 0x14, 0x8a, 	/*Color of index 1*/
 
@@ -330,41 +330,43 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_BONGOCAT-
   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 
 };
 
-const lv_image_dsc_t bongocat-default = {
-  .header.cf = LV_COLOR_FORMAT_RGB565,
-  .header.magic = LV_IMAGE_HEADER_MAGIC,
-  .header.w = 68,
-  .header.h = 69,
-  .data_size = 4692 * 2,
-  .data = bongocat-default_map,
-};
-        
-const lv_img_dsc_t bongocat-left = {
-  .header.cf = LV_IMG_CF_INDEXED_1BIT,
-  .header.always_zero = 0,
-  .header.reserved = 0,
-  .header.w = 68,
-  .header.h = 69,
-  .data_size = 629,
-  .data = bongocat-left_map,
+const lv_img_dsc_t bongocat_default = {
+    .header.cf = LV_IMG_CF_INDEXED_1BIT,
+    .header.always_zero = 0,
+    .header.reserved = 0,
+    .header.w = 68,
+    .header.h = 69,
+    .data_size = 629,
+    .data = bongocat_default_map,
 };
 
-const lv_img_dsc_t bongocat-right = {
-  .header.cf = LV_IMG_CF_INDEXED_1BIT,
-  .header.always_zero = 0,
-  .header.reserved = 0,
-  .header.w = 68,
-  .header.h = 69,
-  .data_size = 629,
-  .data = bongocat-right_map,
+const lv_img_dsc_t bongocat_left = {
+    .header.cf = LV_IMG_CF_INDEXED_1BIT,
+    .header.always_zero = 0,
+    .header.reserved = 0,
+    .header.w = 68,
+    .header.h = 69,
+    .data_size = 629,
+    .data = bongocat_left_map,
 };
 
-const lv_img_dsc_t bongocat-both = {
-  .header.cf = LV_IMG_CF_INDEXED_1BIT,
-  .header.always_zero = 0,
-  .header.reserved = 0,
-  .header.w = 68,
-  .header.h = 69,
-  .data_size = 629,
-  .data = bongocat-both_map,
+
+const lv_img_dsc_t bongocat_right = {
+    .header.cf = LV_IMG_CF_INDEXED_1BIT,
+    .header.always_zero = 0,
+    .header.reserved = 0,
+    .header.w = 68,
+    .header.h = 69,
+    .data_size = 629,
+    .data = bongocat_right_map,
+};
+
+const lv_img_dsc_t bongocat_both = {
+    .header.cf = LV_IMG_CF_INDEXED_1BIT,
+    .header.always_zero = 0,
+    .header.reserved = 0,
+    .header.w = 68,
+    .header.h = 69,
+    .data_size = 629,
+    .data = bongocat_both_map,
 };
