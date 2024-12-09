@@ -25,7 +25,6 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, bool left_pr
     if (widget->current_frame != frame) {
         widget->current_frame = frame;
         lv_img_set_src(widget->obj, frame);
-        lv_img_set_angle(widget->obj, 900); // 90 degrees, LVGL uses tenths of a degree
     }
 }
 
@@ -59,7 +58,6 @@ ZMK_SUBSCRIPTION(widget_bongocat, zmk_position_state_changed);
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
     widget->obj = lv_img_create(parent);
     lv_img_set_src(widget->obj, &bongocat_default);
-    lv_img_set_angle(widget->obj, 900); // Set initial rotation
     
     widget->left_pressed = false;
     widget->right_pressed = false;
