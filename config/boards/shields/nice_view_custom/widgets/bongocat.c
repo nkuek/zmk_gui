@@ -74,7 +74,7 @@ int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *paren
 }
 
 int zmk_widget_bongocat_process_keycode_state_changed(struct zmk_widget_bongocat *widget,
-                                                    struct zmk_keycode_state_changed *ev) {
+                                                    const struct zmk_keycode_state_changed *ev) {
     if (!ev) {
         return -EINVAL;
     }
@@ -94,13 +94,15 @@ int zmk_widget_bongocat_process_keycode_state_changed(struct zmk_widget_bongocat
 }
 
 static int bongocat_event_listener(const zmk_event_t *eh) {
+    const struct zmk_keycode_state_changed *ev = NULL;
     struct zmk_widget_bongocat *widget;
-    struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
-    if (ev) {
+    
+    if ((ev = as_zmk_keycode_state_changed(eh)) != NULL) {
         SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
             zmk_widget_bongocat_process_keycode_state_changed(widget, ev);
         }
     }
+    
     return 0;
 }
 
