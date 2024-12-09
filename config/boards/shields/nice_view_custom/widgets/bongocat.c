@@ -9,7 +9,9 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include <zmk/display.h>
+#include <zmk/event_manager.h>
 #include <zmk/events/keycode_state_changed.h>
+
 #include "bongocat.h"
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
@@ -66,7 +68,7 @@ int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *paren
     return 0;
 }
 
-void bongocat_update_cb(struct bongocat_state state) {
+static void bongocat_update_cb(struct bongocat_state state) {
     struct zmk_widget_bongocat *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
         widget->state.is_typing = state.is_typing;
@@ -80,19 +82,32 @@ void bongocat_update_cb(struct bongocat_state state) {
     }
 }
 
-struct bongocat_state bongocat_get_state(const zmk_event_t *eh) {
-    const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
-    struct bongocat_state state = {
-        .is_typing = ev->state,
-        .last_update = k_uptime_get_32()
-    };
-    return state;
+static struct bongocat_state bongocat_get_state(const zmk_event_t *eh) {
+    if (as_zmk_keycode_state_changed(eh)) {
+        struct zmk_keycode_state_changed *ev = cast_zmk_keycode_state_changed(eh);
+        return (struct bongocat_state){
+            .is_typing = ev->state,
+            .last_update = k_uptime_get_32()
+        };
+    }
+    return (struct bongocat_state){ 0 };
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_bongocat, struct bongocat_state,
-                           bongocat_update_cb, bongocat_get_state)
+static const struct zmk_widget_listener bongocat_listener = {
+    .get_state = bongocat_get_state,
+};
 
-ZMK_SUBSCRIPTION(widget_bongocat, zmk_keycode_state_changed);
+static const struct zmk_listener bongocat_listeners[] = {
+    {
+        .listener = &bongocat_listener,
+        .event = &keycode_state_changed_event,
+    }
+};
+
+const struct zmk_listener_array bongocat_listeners_array = {
+    .listeners = bongocat_listeners,
+    .len = ARRAY_SIZE(bongocat_listeners),
+};
 
 lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget) {
     return widget->obj;
