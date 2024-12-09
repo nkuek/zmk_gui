@@ -19,12 +19,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
-struct peripheral_status_state {
-    bool connected;
-    bool left_pressed;
-    bool right_pressed;
-};
-
 static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
 
