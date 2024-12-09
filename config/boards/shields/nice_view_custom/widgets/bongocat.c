@@ -1,51 +1,60 @@
-#include <lvgl.h>
 #include <zephyr/kernel.h>
-#include <zephyr/logging/log.h>
-
-LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
-
+#include <lvgl.h>
+#include <zmk/event_manager.h>
+#include <zmk/events/keycode_state_changed.h>
 #include "bongocat.h"
 
-LV_IMG_DECLARE(bongocat_default);
-LV_IMG_DECLARE(bongocat_left);
-LV_IMG_DECLARE(bongocat_right);
-LV_IMG_DECLARE(bongocat_both);
-
-struct bongocat_state {
-    enum bongocat_animation_state {
-        BONGOCAT_DEFAULT,
-        BONGOCAT_LEFT,
-        BONGOCAT_RIGHT,
-        BONGOCAT_BOTH
-    } current_state;
-};
+#include <zephyr/logging/log.h>
+LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 static void set_animation_state(struct zmk_widget_bongocat *widget, struct bongocat_state state) {
     const lv_img_dsc_t* frame;
     
-    switch (state.current_state) {
-        case BONGOCAT_LEFT:
-            frame = &bongocat_left;
-            break;
-        case BONGOCAT_RIGHT:
-            frame = &bongocat_right;
-            break;
-        case BONGOCAT_BOTH:
-            frame = &bongocat_both;
-            break;
-        default:
-            frame = &bongocat_default;
-            break;
+    if (state.left_pressed && state.right_pressed) {
+        frame = &bongocat_both;
+    } else if (state.left_pressed) {
+        frame = &bongocat_left;
+    } else if (state.right_pressed) {
+        frame = &bongocat_right;
+    } else {
+        frame = &bongocat_default;
     }
 
     lv_img_set_src(widget->obj, frame);
 }
 
+static void handle_keycode_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_keycode_state_changed *ev) {
+    int col = ev->position % 12;
+    bool is_left = col < 6;
+    
+    if (is_left) {
+        widget->state.left_pressed = ev->state;
+    } else {
+        widget->state.right_pressed = ev->state;
+    }
+    
+    set_animation_state(widget, widget->state);
+}
+
+static void keycode_state_changed_cb(zmk_event_t *eh) {
+    struct zmk_widget_bongocat *widget;
+    const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    if (!ev) return;
+    
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
+        handle_keycode_state_changed(widget, ev);
+    }
+}
+
+ZMK_LISTENER(widget_bongocat, keycode_state_changed_cb);
+ZMK_SUBSCRIPTION(widget_bongocat, zmk_keycode_state_changed);
+
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
     widget->obj = lv_img_create(parent);
     lv_img_set_src(widget->obj, &bongocat_default);
+    widget->state = (struct bongocat_state){0};
     
     sys_slist_append(&widgets, &widget->node);
 
@@ -56,18 +65,10 @@ lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget) {
     return widget->obj;
 }
 
-void zmk_widget_bongocat_set_state(struct zmk_widget_bongocat *widget, bool left_pressed, bool right_pressed) {
-    struct bongocat_state state;
-    
-    if (left_pressed && right_pressed) {
-        state.current_state = BONGOCAT_BOTH;
-    } else if (left_pressed) {
-        state.current_state = BONGOCAT_LEFT;
-    } else if (right_pressed) {
-        state.current_state = BONGOCAT_RIGHT;
-    } else {
-        state.current_state = BONGOCAT_DEFAULT;
+void widget_bongocat_init() {
+    static bool initialized = false;
+    if (!initialized) {
+        initialized = true;
+        widget_bongocat_init();
     }
-    
-    set_animation_state(widget, state);
 }
