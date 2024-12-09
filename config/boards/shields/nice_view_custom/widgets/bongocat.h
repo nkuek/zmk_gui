@@ -19,15 +19,16 @@ struct zmk_widget_bongocat {
     sys_snode_t node;
     lv_obj_t *obj;
     lv_obj_t *img;
+    lv_obj_t *wpm_label;
     struct {
         enum bongocat_state state;
         uint32_t last_keypress;
         bool left_active;
         bool right_active;
+        uint8_t wpm;
     } data;
 };
 
-// Frame image declarations - defined in bongocat_frames.c
 extern const lv_img_dsc_t bongocat_default;
 extern const lv_img_dsc_t bongocat_left;
 extern const lv_img_dsc_t bongocat_right;
