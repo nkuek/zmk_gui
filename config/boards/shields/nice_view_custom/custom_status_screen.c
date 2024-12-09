@@ -23,8 +23,8 @@ lv_obj_t *zmk_display_status_screen() {
     screen = lv_obj_create(NULL);
 
 #if IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
-    zmk_widget_status_init(&status_widget, screen);
-    lv_obj_align(zmk_widget_status_obj(&status_widget), LV_ALIGN_CENTER, 0, 0);
+    zmk_widget_bongocat_init(&bongocat_widget, screen);
+    lv_obj_align(zmk_widget_bongocat_obj(&bongocat_widget), LV_ALIGN_BOTTOM_MID, 0, 0);
 #else
     zmk_widget_status_init(&status_widget, screen);
     lv_obj_align(zmk_widget_status_obj(&status_widget), LV_ALIGN_TOP_MID, 0, 0);
