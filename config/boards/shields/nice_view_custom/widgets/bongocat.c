@@ -1,7 +1,7 @@
 #include <zephyr/kernel.h>
 #include <lvgl.h>
 #include <zmk/event_manager.h>
-#include <zmk/events/keycode_state_changed.h>
+#include <zmk/events/position_state_changed.h>
 #include "bongocat.h"
 
 #include <zephyr/logging/log.h>
@@ -25,7 +25,7 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, struct bongo
     lv_img_set_src(widget->obj, frame);
 }
 
-static void handle_keycode_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_keycode_state_changed *ev) {
+static void handle_position_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_position_state_changed *ev) {
     int col = ev->position % 12;
     bool is_left = col < 6;
     
@@ -38,18 +38,18 @@ static void handle_keycode_state_changed(struct zmk_widget_bongocat *widget, con
     set_animation_state(widget, widget->state);
 }
 
-static void keycode_state_changed_cb(zmk_event_t *eh) {
+static void position_state_changed_cb(zmk_event_t *eh) {
     struct zmk_widget_bongocat *widget;
-    const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
     if (!ev) return;
     
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
-        handle_keycode_state_changed(widget, ev);
+        handle_position_state_changed(widget, ev);
     }
 }
 
-ZMK_LISTENER(widget_bongocat, keycode_state_changed_cb);
-ZMK_SUBSCRIPTION(widget_bongocat, zmk_keycode_state_changed);
+ZMK_LISTENER(widget_bongocat, position_state_changed_cb);
+ZMK_SUBSCRIPTION(widget_bongocat, zmk_position_state_changed);
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
     widget->obj = lv_img_create(parent);
