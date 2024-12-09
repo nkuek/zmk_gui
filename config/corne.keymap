@@ -93,6 +93,12 @@
             key-positions = <39 22>;
             timeout-ms = <50>;
         };
+
+        Enter2 {
+            bindings = <&none>;
+            key-positions = <40 22>;
+            timeout-ms = <50>;
+        };
     };
 
     macros {
