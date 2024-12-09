@@ -53,9 +53,11 @@ ZMK_SUBSCRIPTION(widget_bongocat, zmk_position_state_changed);
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
     widget->obj = lv_img_create(parent);
     lv_img_set_src(widget->obj, &bongocat_default);
+    lv_img_set_angle(widget->obj, 900);  // 90 degrees clockwise (in tenths of a degree)
     widget->state = (struct bongocat_state){0};
     
     sys_slist_append(&widgets, &widget->node);
+    widget_bongocat_init();
 
     return 0;
 }
