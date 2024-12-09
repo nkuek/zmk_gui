@@ -277,16 +277,24 @@ ZMK_SUBSCRIPTION(widget_wpm_status, zmk_wpm_state_changed);
 int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
     lv_obj_set_size(widget->obj, 160, 68);
+    
+    // Create top section with battery and WPM
     lv_obj_t *top = lv_canvas_create(widget->obj);
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
+    
+    // Create bongocat widget
+    struct zmk_widget_bongocat *bongocat = malloc(sizeof(struct zmk_widget_bongocat));
+    zmk_widget_bongocat_init(bongocat, widget->obj);
+    lv_obj_align(zmk_widget_bongocat_obj(bongocat), LV_ALIGN_TOP_LEFT, 24, 0);
+    
+    // Create bottom section with layer info
     lv_obj_t *bottom = lv_canvas_create(widget->obj);
     lv_obj_align(bottom, LV_ALIGN_TOP_LEFT, -44, 0);
     lv_canvas_set_buffer(bottom, widget->cbuf3, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();
-    widget_bongocat_init();
     widget_layer_status_init();
     widget_wpm_status_init();
 
