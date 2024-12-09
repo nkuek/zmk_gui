@@ -7,7 +7,6 @@
 
 #include <lvgl.h>
 #include <zephyr/kernel.h>
-#include <zmk/events/keycode_state_changed.h>
 
 enum bongocat_state {
     BONGOCAT_STATE_IDLE,
@@ -31,6 +30,4 @@ extern const lv_img_dsc_t tap_cat_1;
 extern const lv_img_dsc_t tap_cat_2;
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent);
-int zmk_widget_bongocat_process_keycode_state_changed(struct zmk_widget_bongocat *widget,
-                                                    const struct zmk_keycode_state_changed *ev);
 lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget);
