@@ -6,13 +6,13 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
-LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
-
 #include <zmk/display.h>
 #include <zmk/event_manager.h>
 #include <zmk/events/keycode_state_changed.h>
 
 #include "bongocat.h"
+
+LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -95,7 +95,7 @@ int zmk_widget_bongocat_process_keycode_state_changed(struct zmk_widget_bongocat
 
 static int bongocat_event_listener(const zmk_event_t *eh) {
     struct zmk_widget_bongocat *widget;
-    struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    struct zmk_keycode_state_changed *ev = zmk_keycode_state_changed(eh);
     if (ev) {
         SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
             zmk_widget_bongocat_process_keycode_state_changed(widget, ev);
