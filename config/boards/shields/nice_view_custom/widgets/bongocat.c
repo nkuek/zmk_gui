@@ -38,8 +38,7 @@ static void handle_wpm_state_changed(struct zmk_widget_bongocat *widget, const s
 
 static void wpm_state_changed_cb(zmk_event_t *eh) {
     struct zmk_widget_bongocat *widget;
-    const struct zmk_wpm_state_changed *ev = as_zmk_wpm_state_changed(eh);
-    if (!ev) return;
+    struct zmk_wpm_state_changed *ev = (struct zmk_wpm_state_changed *)eh;
     
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
         handle_wpm_state_changed(widget, ev);
