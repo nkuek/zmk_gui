@@ -10,7 +10,9 @@
 
 enum bongocat_state {
     BONGOCAT_STATE_IDLE,
-    BONGOCAT_STATE_TYPING
+    BONGOCAT_STATE_LEFT_SIDE,
+    BONGOCAT_STATE_RIGHT_SIDE,
+    BONGOCAT_STATE_BOTH_SIDES
 };
 
 struct zmk_widget_bongocat {
@@ -19,15 +21,17 @@ struct zmk_widget_bongocat {
     lv_obj_t *img;
     struct {
         enum bongocat_state state;
-        uint8_t frame;
         uint32_t last_keypress;
+        bool left_active;
+        bool right_active;
     } data;
 };
 
 // Frame image declarations - defined in bongocat_frames.c
-extern const lv_img_dsc_t idle_cat;
-extern const lv_img_dsc_t tap_cat_1;
-extern const lv_img_dsc_t tap_cat_2;
+extern const lv_img_dsc_t bongocat_default;
+extern const lv_img_dsc_t bongocat_left;
+extern const lv_img_dsc_t bongocat_right;
+extern const lv_img_dsc_t bongocat_both;
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent);
 lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget);
