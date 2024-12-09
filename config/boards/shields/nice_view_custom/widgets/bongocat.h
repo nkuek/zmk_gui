@@ -7,22 +7,20 @@
 
 #include <lvgl.h>
 #include <zephyr/kernel.h>
+#include <zmk/events/keycode_state_changed.h>
 
 struct zmk_widget_bongocat {
     sys_snode_t node;
     lv_obj_t *obj;
     lv_obj_t *img;
-    lv_timer_t *timer;
-    struct state {
-        bool is_typing;
-        uint8_t current_frame;
-        uint32_t last_press;
-    } state;
+    struct bongocat_widget_data {
+        enum bongocat_state state;
+        uint8_t frame;
+        uint32_t last_keypress;
+    } data;
 };
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent);
+int zmk_widget_bongocat_process_keycode_state_changed(struct zmk_widget_bongocat *widget,
+                                                    struct zmk_keycode_state_changed *ev);
 lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget);
-
-extern const lv_img_dsc_t idle_cat;
-extern const lv_img_dsc_t tap_cat_1;
-extern const lv_img_dsc_t tap_cat_2;
