@@ -46,15 +46,78 @@ struct wpm_status_state {
 
 static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
-    lv_draw_rect_dsc_t rect_black_dsc;
-    // Fill background
-    lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
-    // setup text
+
     lv_draw_label_dsc_t label_dsc;
-    init_label_dsc(&label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_16, LV_TEXT_ALIGN_RIGHT);
-    char output_text[] = {'h', 'e', 'l', 'l', 'o', ' ', 'w', 'o', 'r', 'l', 'd'};
-    // draw the text
+    init_label_dsc(&label_dsc, lvgl_foreground, &lv_font_montserrat_16, lv_text_align_right);
+    lv_draw_label_dsc_t label_dsc_wpm;
+    init_label_dsc(&label_dsc_wpm, lvgl_foreground, &lv_font_unscii_8, lv_text_align_right);
+    lv_draw_rect_dsc_t rect_black_dsc;
+    init_rect_dsc(&rect_black_dsc, lvgl_background);
+    lv_draw_rect_dsc_t rect_white_dsc;
+    init_rect_dsc(&rect_white_dsc, lvgl_foreground);
+    lv_draw_line_dsc_t line_dsc;
+    init_line_dsc(&line_dsc, lvgl_foreground, 1);
+
+    // fill background
+    lv_canvas_draw_rect(canvas, 0, 0, canvas_size, canvas_size, &rect_black_dsc);
+
+    // draw battery
+    draw_battery(canvas, state);
+
+    // draw output status
+    char output_text[10] = {};
+
+    switch (state->selected_endpoint.transport) {
+    case zmk_transport_usb:
+        strcat(output_text, lv_symbol_usb);
+        break;
+    case zmk_transport_ble:
+        if (state->active_profile_bonded) {
+            if (state->active_profile_connected) {
+                strcat(output_text, lv_symbol_wifi);
+            } else {
+                strcat(output_text, lv_symbol_close);
+            }
+        } else {
+            strcat(output_text, lv_symbol_settings);
+        }
+        break;
+    }
+
     lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc, output_text);
+
+    // Draw WPM
+    lv_canvas_draw_rect(canvas, 0, 21, 68, 42, &rect_white_dsc);
+    lv_canvas_draw_rect(canvas, 1, 22, 66, 40, &rect_black_dsc);
+
+    char wpm_text[6] = {};
+    snprintf(wpm_text, sizeof(wpm_text), "%d", state->wpm[9]);
+    lv_canvas_draw_text(canvas, 42, 52, 24, &label_dsc_wpm, wpm_text);
+
+    int max = 0;
+    int min = 256;
+
+    for (int i = 0; i < 10; i++) {
+        if (state->wpm[i] > max) {
+            max = state->wpm[i];
+        }
+        if (state->wpm[i] < min) {
+            min = state->wpm[i];
+        }
+    }
+
+    int range = max - min;
+    if (range == 0) {
+        range = 1;
+    }
+
+    lv_point_t points[10];
+    for (int i = 0; i < 10; i++) {
+        points[i].x = 2 + i * 7;
+        points[i].y = 60 - (state->wpm[i] - min) * 36 / range;
+    }
+    lv_canvas_draw_line(canvas, points, 10, &line_dsc);
+
     // Rotate canvas
     rotate_canvas(canvas, cbuf);
 }
