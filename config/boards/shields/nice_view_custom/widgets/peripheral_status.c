@@ -69,7 +69,9 @@ static void handle_keycode_state_changed(struct zmk_widget_status *widget, const
     const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
     if (!ev) return;
 
-    bool is_left = ev->position < 24;  // Assuming first 24 positions are left side
+    uint32_t pos = (ev->key_position_l << 8) | ev->key_position_h;
+    bool is_left = pos < 24;  // First 24 positions are left side
+    
     if (is_left) {
         widget->peripheral_state.left_pressed = ev->state;
     } else {
