@@ -10,13 +10,10 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include <zmk/battery.h>
 #include <zmk/display.h>
-#include <zmk/events/usb_conn_state_changed.h>
 #include <zmk/event_manager.h>
 #include <zmk/events/battery_state_changed.h>
 #include <zmk/split/bluetooth/peripheral.h>
 #include <zmk/events/split_peripheral_status_changed.h>
-#include <zmk/usb.h>
-#include <zmk/ble.h>
 
 #include "peripheral_status.h"
 
@@ -36,17 +33,15 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
     // Draw battery
     draw_battery(canvas, state);
 
-    // Draw output status
+    // Draw connection status
     lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc,
                        state->connected ? LV_SYMBOL_WIFI : LV_SYMBOL_CLOSE);
 
-    // Rotate canvas
     rotate_canvas(canvas, cbuf);
 }
 
 static void set_battery_status(struct zmk_widget_status *widget,
                              struct battery_status_state state) {
-    widget->state.charging = state.usb_present;
     widget->state.battery = state.level;
     draw_top(widget->obj, widget->cbuf, &widget->state);
 }
@@ -60,20 +55,9 @@ static void battery_status_update_cb(struct battery_status_state state) {
 
 static struct battery_status_state battery_status_get_state(const zmk_event_t *eh) {
     return (struct battery_status_state){
-        .level = zmk_battery_state_of_charge(),
-#if IS_ENABLED(CONFIG_USB_DEVICE_STACK)
-        .usb_present = zmk_usb_is_powered(),
-#endif /* IS_ENABLED(CONFIG_USB_DEVICE_STACK) */
+        .level = zmk_battery_state_of_charge()
     };
 }
-
-ZMK_DISPLAY_WIDGET_LISTENER(widget_battery_status, struct battery_status_state,
-                          battery_status_update_cb, battery_status_get_state)
-
-ZMK_SUBSCRIPTION(widget_battery_status, zmk_battery_state_changed);
-#if IS_ENABLED(CONFIG_USB_DEVICE_STACK)
-ZMK_SUBSCRIPTION(widget_battery_status, zmk_usb_conn_state_changed);
-#endif /* IS_ENABLED(CONFIG_USB_DEVICE_STACK) */
 
 static void set_connection_status(struct zmk_widget_status *widget,
                                 struct peripheral_status_state state) {
@@ -87,6 +71,10 @@ static void output_status_update_cb(struct peripheral_status_state state) {
         set_connection_status(widget, state); 
     }
 }
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_battery_status, struct battery_status_state,
+                          battery_status_update_cb, battery_status_get_state)
+ZMK_SUBSCRIPTION(widget_battery_status, zmk_battery_state_changed);
 
 ZMK_DISPLAY_WIDGET_LISTENER(widget_peripheral_status, struct peripheral_status_state,
                           output_status_update_cb, get_state)

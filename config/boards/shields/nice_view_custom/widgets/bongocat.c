@@ -39,7 +39,6 @@ static void draw_bongocat(struct zmk_widget_bongocat *widget) {
             break;
     }
 
-    // Update WPM display
     char wpm_text[10];
     snprintf(wpm_text, sizeof(wpm_text), "%d WPM", widget->data.wpm);
     lv_label_set_text(widget->wpm_label, wpm_text);
@@ -66,12 +65,10 @@ int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *paren
     widget->obj = lv_obj_create(parent);
     lv_obj_set_size(widget->obj, 160, 68);
     
-    // Create bongocat image
     widget->img = lv_img_create(widget->obj);
     lv_img_set_src(widget->img, &bongocat_default);
-    lv_obj_align(widget->img, LV_ALIGN_TOP_RIGHT, 0, 20); // Position below status
+    lv_obj_align(widget->img, LV_ALIGN_TOP_RIGHT, 0, 20);
     
-    // Create WPM label
     widget->wpm_label = lv_label_create(widget->obj);
     lv_obj_set_style_text_font(widget->wpm_label, &lv_font_montserrat_16, 0);
     lv_obj_set_style_text_color(widget->wpm_label, IS_ENABLED(CONFIG_NICE_VIEW_WIDGET_INVERTED) ? lv_color_white() : lv_color_black(), 0);
