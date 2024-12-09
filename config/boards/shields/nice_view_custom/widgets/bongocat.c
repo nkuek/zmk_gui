@@ -10,6 +10,7 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 static void set_animation_state(struct zmk_widget_bongocat *widget, bool left_pressed, bool right_pressed) {
     const lv_img_dsc_t* frame;
     
+    // Determine which frame to show
     if (left_pressed && right_pressed) {
         frame = &bongocat_both;
     } else if (left_pressed) {
@@ -20,23 +21,27 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, bool left_pr
         frame = &bongocat_default;
     }
 
-    // Clear canvas
-    lv_draw_rect_dsc_t rect_dsc;
-    init_rect_dsc(&rect_dsc, LVGL_BACKGROUND);
-    lv_canvas_draw_rect(widget->obj, 0, 0, 68, 69, &rect_dsc);
-
-    // Draw bongocat frame
-    lv_draw_img_dsc_t img_dsc;
-    lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(widget->obj, 0, 0, frame, &img_dsc);
-
-    // Rotate canvas
-    rotate_canvas(widget->obj, widget->cbuf);
+    // Only redraw if the frame has changed
+    if (widget->current_frame != frame) {
+        widget->current_frame = frame;
+        
+        // Clear and redraw in one pass
+        lv_canvas_fill_bg(widget->obj, LVGL_BACKGROUND, LV_OPA_COVER);
+        lv_draw_img_dsc_t img_dsc;
+        lv_draw_img_dsc_init(&img_dsc);
+        lv_canvas_draw_img(widget->obj, 0, 0, frame, &img_dsc);
+        rotate_canvas(widget->obj, widget->cbuf);
+        
+        // Force immediate refresh
+        lv_obj_invalidate(widget->obj);
+    }
 }
 
 static void handle_position_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_position_state_changed *ev) {
+    if (ev->state > 1) return; // Ignore intermediate states
+    
     int col = ev->position % 12;
-    bool is_left = col >= 6;  // Columns 6-11 are left side
+    bool is_left = col < 6;  // Columns 6-11 are left side
     
     if (is_left) {
         widget->left_pressed = ev->state;
@@ -67,12 +72,12 @@ int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *paren
     
     widget->left_pressed = false;
     widget->right_pressed = false;
+    widget->current_frame = NULL;
     
-    // Initialize with default frame
+    // Set initial frame
     set_animation_state(widget, false, false);
     
     sys_slist_append(&widgets, &widget->node);
-
     return 0;
 }
 
