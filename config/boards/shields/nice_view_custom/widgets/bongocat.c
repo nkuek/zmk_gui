@@ -45,7 +45,7 @@ static void wpm_state_changed_cb(zmk_event_t *eh) {
     }
 }
 
-ZMK_LISTENER(widget_bongocat, wpm_state_changed_cb);
+ZMK_DISPLAY_WIDGET_LISTENER(widget_bongocat, wpm_state_changed_cb);
 ZMK_SUBSCRIPTION(widget_bongocat, zmk_wpm_state_changed);
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
