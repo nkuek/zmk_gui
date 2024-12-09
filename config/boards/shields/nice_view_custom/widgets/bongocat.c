@@ -11,6 +11,7 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 static void set_animation_state(struct zmk_widget_bongocat *widget, struct bongocat_state state) {
     const lv_img_dsc_t* frame;
+    lv_obj_t *canvas = widget->canvas;
     
     if (state.left_pressed && state.right_pressed) {
         frame = &bongocat_both;
@@ -22,7 +23,18 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, struct bongo
         frame = &bongocat_default;
     }
 
-    lv_img_set_src(widget->obj, frame);
+    // Clear canvas
+    lv_draw_rect_dsc_t rect_dsc;
+    init_rect_dsc(&rect_dsc, LVGL_BACKGROUND);
+    lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_dsc);
+
+    // Draw bongocat frame
+    lv_draw_img_dsc_t img_dsc;
+    lv_draw_img_dsc_init(&img_dsc);
+    lv_canvas_draw_img(canvas, 0, 0, frame, &img_dsc);
+
+    // Rotate canvas
+    rotate_canvas(canvas, widget->cbuf);
 }
 
 static void handle_position_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_position_state_changed *ev) {
