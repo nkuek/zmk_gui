@@ -25,9 +25,9 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, bool use_lef
     }
 }
 
-static void handle_wpm_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_wpm_state_changed *ev) {
+static void handle_wpm_state_changed(struct zmk_widget_bongocat *widget, struct wpm_state state) {
     bool was_typing = widget->is_typing;
-    widget->is_typing = (ev->state > 0);
+    widget->is_typing = (state.wpm > 0);
     
     // If we just started typing or are still typing, alternate frames
     if (widget->is_typing) {
@@ -37,16 +37,19 @@ static void handle_wpm_state_changed(struct zmk_widget_bongocat *widget, const s
     set_animation_state(widget, widget->use_left);
 }
 
-static void wpm_state_changed_cb(zmk_event_t *eh) {
+static void wpm_state_changed_cb(struct wpm_state state) {
     struct zmk_widget_bongocat *widget;
-    struct zmk_wpm_state_changed *ev = (struct zmk_wpm_state_changed *)eh;
     
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
-        handle_wpm_state_changed(widget, ev);
+        handle_wpm_state_changed(widget, state);
     }
 }
 
-ZMK_DISPLAY_WIDGET_LISTENER(widget_bongocat, wpm_state_changed_cb);
+static struct wpm_state wpm_state_get_state(const zmk_event_t *eh) {
+    return (struct wpm_state){.wpm = zmk_wpm_get_state()};
+}
+
+ZMK_DISPLAY_WIDGET_LISTENER(widget_bongocat, struct wpm_state, wpm_state_changed_cb, wpm_state_get_state);
 ZMK_SUBSCRIPTION(widget_bongocat, zmk_wpm_state_changed);
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
