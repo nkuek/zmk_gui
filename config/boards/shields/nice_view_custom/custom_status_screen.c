@@ -12,7 +12,7 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #if IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
-static struct zmk_widget_status status_widget;
+static struct zmk_widget_bongocat bongocat_widget;
 #else
 static struct zmk_widget_status status_widget;
 static struct zmk_widget_bongocat bongocat_widget;

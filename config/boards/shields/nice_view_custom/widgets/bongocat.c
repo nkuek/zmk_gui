@@ -40,7 +40,7 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, bool left_pr
 }
 
 static void handle_position_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_position_state_changed *ev) {
-    bool is_right = (ev->position % 12) >= 15;
+    bool is_right = (ev->position % 12) >= 6;
     
     if (is_right) {
         widget->right_pressed = ev->state;
