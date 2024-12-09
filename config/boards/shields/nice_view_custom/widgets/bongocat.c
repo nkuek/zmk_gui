@@ -11,6 +11,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/display.h>
 #include <zmk/event_manager.h>
 #include <zmk/events/keycode_state_changed.h>
+#include <zmk/widgets/widget_listener.h>
 
 #include "bongocat.h"
 
@@ -83,8 +84,8 @@ static void bongocat_update_cb(struct bongocat_state state) {
 }
 
 static struct bongocat_state bongocat_get_state(const zmk_event_t *eh) {
-    if (as_zmk_keycode_state_changed(eh)) {
-        struct zmk_keycode_state_changed *ev = cast_zmk_keycode_state_changed(eh);
+    struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    if (ev) {
         return (struct bongocat_state){
             .is_typing = ev->state,
             .last_update = k_uptime_get_32()
@@ -95,19 +96,12 @@ static struct bongocat_state bongocat_get_state(const zmk_event_t *eh) {
 
 static const struct zmk_widget_listener bongocat_listener = {
     .get_state = bongocat_get_state,
+    .update_cb = bongocat_update_cb,
 };
 
-static const struct zmk_listener bongocat_listeners[] = {
-    {
-        .listener = &bongocat_listener,
-        .event = &keycode_state_changed_event,
-    }
-};
+ZMK_DISPLAY_WIDGET_LISTENER(widget_bongocat, struct bongocat_state, bongocat_update_cb, bongocat_get_state)
 
-const struct zmk_listener_array bongocat_listeners_array = {
-    .listeners = bongocat_listeners,
-    .len = ARRAY_SIZE(bongocat_listeners),
-};
+ZMK_SUBSCRIPTION(widget_bongocat, zmk_keycode_state_changed);
 
 lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget) {
     return widget->obj;
