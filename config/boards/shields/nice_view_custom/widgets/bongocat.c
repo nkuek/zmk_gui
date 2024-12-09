@@ -72,7 +72,6 @@ int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *paren
     set_animation_state(widget, false, false);
     
     sys_slist_append(&widgets, &widget->node);
-    widget_bongocat_init();
 
     return 0;
 }
