@@ -91,6 +91,7 @@
         Enter {
             bindings = <&kp ENTER>;
             key-positions = <39 22>;
+            timeout-ms = <50>;
         };
     };
 
