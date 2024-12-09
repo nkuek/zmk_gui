@@ -87,6 +87,11 @@
             timeout-ms = <50>;
             key-positions = <16 9>;
         };
+
+        Enter {
+            bindings = <&kp ENTER>;
+            key-positions = <39 22>;
+        };
     };
 
     macros {
