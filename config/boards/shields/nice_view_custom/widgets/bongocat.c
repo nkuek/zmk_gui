@@ -9,6 +9,10 @@
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
+struct wpm_state {
+    uint8_t wpm;
+};
+
 static void set_animation_state(struct zmk_widget_bongocat *widget, bool use_left) {
     const lv_img_dsc_t* frame;
     
