@@ -11,6 +11,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/split/bluetooth/peripheral.h>
 #include <zmk/events/split_peripheral_status_changed.h>
 #include <zmk/events/keycode_state_changed.h>
+#include <zmk/events/position_state_changed.h>
 #include <zmk/usb.h>
 #include <zmk/ble.h>
 
@@ -66,7 +67,7 @@ static void update_bongocat(struct zmk_widget_status *widget, struct peripheral_
 }
 
 static void handle_keycode_state_changed(struct zmk_widget_status *widget, const zmk_event_t *eh) {
-    const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
     if (!ev) return;
 
     int row = ev->position / 12;
