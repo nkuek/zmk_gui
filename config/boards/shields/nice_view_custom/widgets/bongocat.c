@@ -3,21 +3,18 @@
 #include <zmk/event_manager.h>
 #include <zmk/events/position_state_changed.h>
 #include "bongocat.h"
-
-#include <zephyr/logging/log.h>
-LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
+#include "util.h"
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
-static void set_animation_state(struct zmk_widget_bongocat *widget, struct bongocat_state state) {
+static void set_animation_state(struct zmk_widget_bongocat *widget, bool left_pressed, bool right_pressed) {
     const lv_img_dsc_t* frame;
-    lv_obj_t *canvas = widget->canvas;
     
-    if (state.left_pressed && state.right_pressed) {
+    if (left_pressed && right_pressed) {
         frame = &bongocat_both;
-    } else if (state.left_pressed) {
+    } else if (left_pressed) {
         frame = &bongocat_left;
-    } else if (state.right_pressed) {
+    } else if (right_pressed) {
         frame = &bongocat_right;
     } else {
         frame = &bongocat_default;
@@ -26,15 +23,15 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, struct bongo
     // Clear canvas
     lv_draw_rect_dsc_t rect_dsc;
     init_rect_dsc(&rect_dsc, LVGL_BACKGROUND);
-    lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_dsc);
+    lv_canvas_draw_rect(widget->obj, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_dsc);
 
     // Draw bongocat frame
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
-    lv_canvas_draw_img(canvas, 0, 0, frame, &img_dsc);
+    lv_canvas_draw_img(widget->obj, 0, 0, frame, &img_dsc);
 
     // Rotate canvas
-    rotate_canvas(canvas, widget->cbuf);
+    rotate_canvas(widget->obj, widget->cbuf);
 }
 
 static void handle_position_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_position_state_changed *ev) {
@@ -42,12 +39,12 @@ static void handle_position_state_changed(struct zmk_widget_bongocat *widget, co
     bool is_left = col >= 6;  // Columns 6-11 are left side
     
     if (is_left) {
-        widget->state.left_pressed = ev->state;
+        widget->left_pressed = ev->state;
     } else {
-        widget->state.right_pressed = ev->state;
+        widget->right_pressed = ev->state;
     }
     
-    set_animation_state(widget, widget->state);
+    set_animation_state(widget, widget->left_pressed, widget->right_pressed);
 }
 
 static void position_state_changed_cb(zmk_event_t *eh) {
@@ -64,10 +61,15 @@ ZMK_LISTENER(widget_bongocat, position_state_changed_cb);
 ZMK_SUBSCRIPTION(widget_bongocat, zmk_position_state_changed);
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
-    widget->obj = lv_img_create(parent);
-    lv_img_set_src(widget->obj, &bongocat_default);
-    lv_img_set_angle(widget->obj, 900);  // 90 degrees clockwise (in tenths of a degree)
-    widget->state = (struct bongocat_state){0};
+    widget->obj = lv_canvas_create(parent);
+    lv_obj_set_size(widget->obj, 68, 68);
+    lv_canvas_set_buffer(widget->obj, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
+    
+    widget->left_pressed = false;
+    widget->right_pressed = false;
+    
+    // Initialize with default frame
+    set_animation_state(widget, false, false);
     
     sys_slist_append(&widgets, &widget->node);
     widget_bongocat_init();
@@ -77,12 +79,4 @@ int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *paren
 
 lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget) {
     return widget->obj;
-}
-
-void widget_bongocat_init() {
-    static bool initialized = false;
-    if (!initialized) {
-        initialized = true;
-        widget_bongocat_init();
-    }
 }
