@@ -23,7 +23,7 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, bool left_pr
     // Clear canvas
     lv_draw_rect_dsc_t rect_dsc;
     init_rect_dsc(&rect_dsc, LVGL_BACKGROUND);
-    lv_canvas_draw_rect(widget->obj, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_dsc);
+    lv_canvas_draw_rect(widget->obj, 0, 0, 68, 69, &rect_dsc);
 
     // Draw bongocat frame
     lv_draw_img_dsc_t img_dsc;
@@ -63,7 +63,7 @@ ZMK_SUBSCRIPTION(widget_bongocat, zmk_position_state_changed);
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
     widget->obj = lv_canvas_create(parent);
     lv_obj_set_size(widget->obj, 68, 68);
-    lv_canvas_set_buffer(widget->obj, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
+    lv_canvas_set_buffer(widget->obj, widget->cbuf, 68, 69, LV_IMG_CF_TRUE_COLOR);
     
     widget->left_pressed = false;
     widget->right_pressed = false;
