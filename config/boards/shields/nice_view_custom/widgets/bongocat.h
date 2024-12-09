@@ -22,3 +22,7 @@ struct zmk_widget_bongocat {
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent);
 lv_obj_t *zmk_widget_bongocat_obj(struct zmk_widget_bongocat *widget);
+
+extern const lv_img_dsc_t idle_cat;
+extern const lv_img_dsc_t tap_cat_1;
+extern const lv_img_dsc_t tap_cat_2;
