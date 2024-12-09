@@ -2,6 +2,7 @@
 
 #include <lvgl.h>
 #include <zephyr/kernel.h>
+#include "util.h"
 
 extern const lv_img_dsc_t bongocat_default;
 extern const lv_img_dsc_t bongocat_left;
