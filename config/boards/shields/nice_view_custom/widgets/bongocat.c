@@ -96,7 +96,7 @@ int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *paren
 }
 
 static void keycode_update_cb(const zmk_event_t *eh) {
-    struct keycode_state_changed *ev = as_keycode_state_changed(eh);
+    struct keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
     struct zmk_widget_bongocat *widget;
     
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
