@@ -94,15 +94,13 @@ int zmk_widget_bongocat_process_keycode_state_changed(struct zmk_widget_bongocat
 }
 
 static int bongocat_event_listener(const zmk_event_t *eh) {
-    const struct zmk_keycode_state_changed *ev = NULL;
     struct zmk_widget_bongocat *widget;
-    
-    if ((ev = as_zmk_keycode_state_changed(eh)) != NULL) {
+    struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    if (ev) {
         SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
             zmk_widget_bongocat_process_keycode_state_changed(widget, ev);
         }
     }
-    
     return 0;
 }
 
