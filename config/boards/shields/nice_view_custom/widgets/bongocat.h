@@ -11,7 +11,6 @@ extern const lv_img_dsc_t bongocat_both;
 struct zmk_widget_bongocat {
     sys_snode_t node;
     lv_obj_t *obj;
-    lv_color_t cbuf[68 * 69];
     bool left_pressed;
     bool right_pressed;
     const lv_img_dsc_t* current_frame;

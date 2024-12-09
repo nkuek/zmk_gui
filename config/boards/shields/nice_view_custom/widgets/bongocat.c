@@ -21,32 +21,23 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, bool left_pr
         frame = &bongocat_default;
     }
 
-    // Only redraw if the frame has changed
+    // Only update if frame changed
     if (widget->current_frame != frame) {
         widget->current_frame = frame;
-        
-        // Clear and redraw in one pass
-        lv_canvas_fill_bg(widget->obj, LVGL_BACKGROUND, LV_OPA_COVER);
-        lv_draw_img_dsc_t img_dsc;
-        lv_draw_img_dsc_init(&img_dsc);
-        lv_canvas_draw_img(widget->obj, 0, 0, frame, &img_dsc);
-        rotate_canvas(widget->obj, widget->cbuf);
-        
-        // Force immediate refresh
-        lv_obj_invalidate(widget->obj);
+        lv_img_set_src(widget->obj, frame);
+        lv_img_set_angle(widget->obj, 900); // 90 degrees, LVGL uses tenths of a degree
     }
 }
 
 static void handle_position_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_position_state_changed *ev) {
     if (ev->state > 1) return; // Ignore intermediate states
     
-    int col = ev->position % 12;
-    bool is_left = col < 6;  // Columns 6-11 are left side
+    bool is_right = (ev->position % 12) >= 6;
     
-    if (is_left) {
-        widget->left_pressed = ev->state;
-    } else {
+    if (is_right) {
         widget->right_pressed = ev->state;
+    } else {
+        widget->left_pressed = ev->state;
     }
     
     set_animation_state(widget, widget->left_pressed, widget->right_pressed);
@@ -66,16 +57,13 @@ ZMK_LISTENER(widget_bongocat, position_state_changed_cb);
 ZMK_SUBSCRIPTION(widget_bongocat, zmk_position_state_changed);
 
 int zmk_widget_bongocat_init(struct zmk_widget_bongocat *widget, lv_obj_t *parent) {
-    widget->obj = lv_canvas_create(parent);
-    lv_obj_set_size(widget->obj, 68, 68);
-    lv_canvas_set_buffer(widget->obj, widget->cbuf, 68, 69, LV_IMG_CF_TRUE_COLOR);
+    widget->obj = lv_img_create(parent);
+    lv_img_set_src(widget->obj, &bongocat_default);
+    lv_img_set_angle(widget->obj, 900); // Set initial rotation
     
     widget->left_pressed = false;
     widget->right_pressed = false;
-    widget->current_frame = NULL;
-    
-    // Set initial frame
-    set_animation_state(widget, false, false);
+    widget->current_frame = &bongocat_default;
     
     sys_slist_append(&widgets, &widget->node);
     return 0;
