@@ -6,11 +6,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include "bongocat.h"
 
-extern const lv_img_dsc_t bongocat_default;
-extern const lv_img_dsc_t bongocat_left;
-extern const lv_img_dsc_t bongocat_right;
-extern const lv_img_dsc_t bongocat_both;
-
 LV_IMG_DECLARE(bongocat_default);
 LV_IMG_DECLARE(bongocat_left);
 LV_IMG_DECLARE(bongocat_right);
