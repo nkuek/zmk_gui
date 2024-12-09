@@ -26,7 +26,8 @@ static void set_animation_state(struct zmk_widget_bongocat *widget, struct bongo
 }
 
 static void handle_position_state_changed(struct zmk_widget_bongocat *widget, const struct zmk_position_state_changed *ev) {
-    bool is_left = ev->position < 24;
+    int col = ev->position % 12;
+    bool is_left = col >= 6;  // Columns 6-11 are left side
     
     if (is_left) {
         widget->state.left_pressed = ev->state;
