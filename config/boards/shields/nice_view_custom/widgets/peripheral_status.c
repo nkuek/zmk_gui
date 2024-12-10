@@ -20,6 +20,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/usb.h>
 #include <zmk/ble.h>
 
+
 #include "peripheral_status.h"
 
 LV_IMG_DECLARE(us);
@@ -27,8 +28,9 @@ LV_IMG_DECLARE(chichi);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
-// Define available images
 static const lv_img_dsc_t *art_images[] = {
+    &balloon,
+    &mountain,
     &us,
     &chichi
 };
@@ -38,7 +40,6 @@ struct peripheral_status_state {
     bool connected;
 };
 
-// Add image cycling state
 struct art_state {
     uint8_t current_image;
     bool auto_cycle;
@@ -49,7 +50,6 @@ static struct art_state art_cycling = {
     .auto_cycle = true
 };
 
-// Timer work item
 static struct k_work_delayable cycle_work;
 
 #define CYCLE_INTERVAL K_SECONDS(5)
@@ -67,47 +67,27 @@ static void cycle_image(struct k_work *work) {
         lv_img_set_src(art, art_images[art_cycling.current_image]);
     }
     
-    // Schedule next cycle
     k_work_schedule(&cycle_work, CYCLE_INTERVAL);
 }
 
-// Handle key press events for manual cycling
-static void handle_keycode(struct zmk_keycode_state_changed *event) {
-    // Check if this is the key we want to use for cycling
-    // You can modify this check based on your keymap
-    if (event->keycode == KC_F13 && event->state) { // Change KC_F13 to your desired key
-        art_cycling.current_image = (art_cycling.current_image + 1) % NUM_IMAGES;
-        
-        struct zmk_widget_status *widget;
-        SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
-            lv_obj_t *art = lv_obj_get_child(widget->obj, 1);
-            lv_img_set_src(art, art_images[art_cycling.current_image]);
-        }
-    }
-    // Toggle auto-cycling
-    else if (event->keycode == KC_F14 && event->state) { // Change KC_F14 to your desired key
-        art_cycling.auto_cycle = !art_cycling.auto_cycle;
-        if (art_cycling.auto_cycle) {
-            k_work_schedule(&cycle_work, CYCLE_INTERVAL);
-        } else {
-            k_work_cancel_delayable(&cycle_work);
-        }
+void peripheral_status_cycle_image(void) {
+    art_cycling.current_image = (art_cycling.current_image + 1) % NUM_IMAGES;
+    
+    struct zmk_widget_status *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
+        lv_obj_t *art = lv_obj_get_child(widget->obj, 1);
+        lv_img_set_src(art, art_images[art_cycling.current_image]);
     }
 }
 
-static void keycode_state_changed_listener(const zmk_event_t *eh) {
-    struct zmk_keycode_state_changed *event = as_zmk_keycode_state_changed(eh);
-    handle_keycode(event);
+void peripheral_status_toggle_auto(void) {
+    art_cycling.auto_cycle = !art_cycling.auto_cycle;
+    if (art_cycling.auto_cycle) {
+        k_work_schedule(&cycle_work, CYCLE_INTERVAL);
+    } else {
+        k_work_cancel_delayable(&cycle_work);
+    }
 }
-
-ZMK_LISTENER(peripheral_status_keycode_listener, keycode_state_changed_listener);
-ZMK_SUBSCRIPTION(peripheral_status_keycode_listener, zmk_keycode_state_changed);
-
-static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
-
-struct peripheral_status_state {
-    bool connected;
-};
 
 static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
@@ -197,7 +177,6 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
 
     sys_slist_append(&widgets, &widget->node);
     
-    // Initialize work item for cycling
     k_work_init_delayable(&cycle_work, cycle_image);
     if (art_cycling.auto_cycle) {
         k_work_schedule(&cycle_work, CYCLE_INTERVAL);
