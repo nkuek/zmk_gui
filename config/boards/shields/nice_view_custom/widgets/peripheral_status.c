@@ -75,14 +75,16 @@ static void handle_keycode(struct zmk_keycode_state_changed *event) {
         return;  // Only handle key press, not release
     }
     
-    if (event->keycode == F13) {
+    // F13
+    if (event->keycode == 0x68) {
         art_cycling.current_image = (art_cycling.current_image + 1) % NUM_IMAGES;
         struct zmk_widget_status *widget;
         SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
             lv_obj_t *art = lv_obj_get_child(widget->obj, 1);
             lv_img_set_src(art, art_images[art_cycling.current_image]);
         }
-    } else if (event->keycode == F14) {
+        // F14
+    } else if (event->keycode == 0x69) {
         art_cycling.auto_cycle = !art_cycling.auto_cycle;
         if (art_cycling.auto_cycle) {
             k_work_schedule(&cycle_work, CYCLE_INTERVAL);
