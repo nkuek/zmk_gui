@@ -132,6 +132,7 @@
         Nvim_Discard {
             bindings = <&nvim_discard>;
             key-positions = <39 21>;
+            require-prior-idle-ms = <250>;
         };
 
         Nvim_Save_All {
@@ -208,7 +209,7 @@
             #binding-cells = <0>;
             bindings = <&kp COLON &kp E &kp EXCLAMATION &kp ENTER>;
             label = "NVIM_DISCARD";
-            wait-ms = <250>;
+            wait-ms = <0>;
         };
 
         nvim_quit: nvim_quit {
