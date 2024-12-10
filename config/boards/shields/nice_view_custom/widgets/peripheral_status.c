@@ -20,7 +20,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/usb.h>
 #include <zmk/ble.h>
 
-
 #include "peripheral_status.h"
 
 LV_IMG_DECLARE(us);
@@ -71,38 +70,6 @@ static void cycle_image(struct k_work *work) {
     
     k_work_schedule(&cycle_work, CYCLE_INTERVAL);
 }
-
-static void handle_keycode(struct zmk_keycode_state_changed *event) {
-    if (!event->state) {
-        return;  // Only handle key press, not release
-    }
-    
-    // F13
-    if (event->keycode == 0x68) {
-        art_cycling.current_image = (art_cycling.current_image + 1) % NUM_IMAGES;
-        struct zmk_widget_status *widget;
-        SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
-            lv_obj_t *art = lv_obj_get_child(widget->obj, 1);
-            lv_img_set_src(art, art_images[art_cycling.current_image]);
-        }
-        // F14
-    } else if (event->keycode == 0x69) {
-        art_cycling.auto_cycle = !art_cycling.auto_cycle;
-        if (art_cycling.auto_cycle) {
-            k_work_schedule(&cycle_work, CYCLE_INTERVAL);
-        } else {
-            k_work_cancel_delayable(&cycle_work);
-        }
-    }
-}
-
-static void keycode_state_changed_listener(const zmk_event_t *eh) {
-    struct zmk_keycode_state_changed *event = as_zmk_keycode_state_changed(eh);
-    handle_keycode(event);
-}
-
-ZMK_LISTENER(peripheral_status_keycode_listener, keycode_state_changed_listener);
-ZMK_SUBSCRIPTION(peripheral_status_keycode_listener, zmk_keycode_state_changed);
 
 static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
