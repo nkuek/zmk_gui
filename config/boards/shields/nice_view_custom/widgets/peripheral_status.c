@@ -104,6 +104,28 @@ static void keycode_state_changed_listener(const zmk_event_t *eh) {
 ZMK_LISTENER(peripheral_status_keycode_listener, keycode_state_changed_listener);
 ZMK_SUBSCRIPTION(peripheral_status_keycode_listener, zmk_keycode_state_changed);
 
+static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
+    lv_obj_t *canvas = lv_obj_get_child(widget, 0);
+
+    lv_draw_label_dsc_t label_dsc;
+    init_label_dsc(&label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_16, LV_TEXT_ALIGN_RIGHT);
+    lv_draw_rect_dsc_t rect_black_dsc;
+    init_rect_dsc(&rect_black_dsc, LVGL_BACKGROUND);
+
+    // Fill background
+    lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
+
+    // Draw battery
+    draw_battery(canvas, state);
+
+    // Draw output status
+    lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc,
+                        state->connected ? LV_SYMBOL_WIFI : LV_SYMBOL_CLOSE);
+
+    // Rotate canvas
+    rotate_canvas(canvas, cbuf);
+}
+
 static void set_battery_status(struct zmk_widget_status *widget,
                                struct battery_status_state state) {
 #if IS_ENABLED(CONFIG_USB_DEVICE_STACK)
