@@ -109,6 +109,16 @@
             bindings = <&kp LS(LC(NUMBER_2))>;
             key-positions = <38 2>;
         };
+
+        Screenshot {
+            bindings = <&kp LG(DOLLAR)>;
+            key-positions = <38 16>;
+        };
+
+        Area_Screenshot {
+            bindings = <&kp LG(PERCENT)>;
+            key-positions = <38 17>;
+        };
     };
 
     macros {
