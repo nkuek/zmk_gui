@@ -227,21 +227,14 @@ ZMK_SUBSCRIPTION(widget_output_status, zmk_usb_conn_state_changed);
 #if defined(CONFIG_ZMK_BLE)
 ZMK_SUBSCRIPTION(widget_output_status, zmk_ble_active_profile_changed);
 #endif
-
 static void handle_position_state_changed(struct zmk_widget_status *widget,
                                         const struct zmk_position_state_changed *ev) {
     bool is_right = (ev->position % 12) >= 6;
     
-    // If key released, explicitly check and clear both states
-    if (!ev->state) {
-        widget->state.left_pressed = false;
-        widget->state.right_pressed = false;
+    if (is_right) {
+        widget->state.right_pressed = ev->state;
     } else {
-        if (is_right) {
-            widget->state.right_pressed = true;
-        } else {
-            widget->state.left_pressed = true;
-        }
+        widget->state.left_pressed = ev->state;
     }
     
     draw_middle(widget->obj, &widget->state);
@@ -312,20 +305,32 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
     lv_obj_set_size(widget->obj, 160, 68);
 
-    // WPM display in top-right corner
+    // Create top canvas for battery and connection status
     lv_obj_t *top = lv_canvas_create(widget->obj);
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
-    // Bongocat in center-left
+    // Create middle section for bongocat
     lv_obj_t *middle = lv_img_create(widget->obj);
-    lv_obj_align(middle, LV_ALIGN_LEFT_MID, 45, 0);
+    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 24, 0);
     lv_img_set_src(middle, &bongocat_default);
+    widget->state.current_frame = &bongocat_default;
+    widget->state.left_pressed = false;
+    widget->state.right_pressed = false;
 
-    // Layer status in bottom-left
+    // Create bottom canvas for layer status
     lv_obj_t *bottom = lv_canvas_create(widget->obj);
-    lv_obj_align(bottom, LV_ALIGN_BOTTOM_LEFT, 0, 0);
+    lv_obj_align(bottom, LV_ALIGN_TOP_LEFT, -44, 0);
     lv_canvas_set_buffer(bottom, widget->cbuf3, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
+
+    sys_slist_append(&widgets, &widget->node);
+
+    widget_battery_status_init();
+    widget_output_status_init();
+    widget_layer_status_init();
+
+    return 0;
+}
 
 lv_obj_t *zmk_widget_status_obj(struct zmk_widget_status *widget) {
     return widget->obj;
