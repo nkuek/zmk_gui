@@ -95,9 +95,19 @@
         };
 
         Enter2 {
-            bindings = <&none>;
+            bindings = <&kp ENTER>;
             key-positions = <40 22>;
             timeout-ms = <50>;
+        };
+
+        Arc_Tab_1 {
+            bindings = <&kp LS(LC(NUMBER_1))>;
+            key-positions = <38 1>;
+        };
+
+        Arc_Tab_2 {
+            bindings = <&kp LS(LC(NUMBER_2))>;
+            key-positions = <38 2>;
         };
     };
 
