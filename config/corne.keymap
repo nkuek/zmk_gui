@@ -90,7 +90,7 @@
 
         Nvim_Save {
             bindings = <&nvim_save>;
-            key-positions = <39 22>;
+            key-positions = <39 23>;
         };
 
         Enter2 {
@@ -136,9 +136,8 @@
 
         Nvim_Save_All {
             bindings = <&nvim_save_all>;
-            key-positions = <39 20 22>;
+            key-positions = <39 20 23>;
             slow-release;
-            timeout-ms = <250>;
         };
     };
 
@@ -209,6 +208,7 @@
             #binding-cells = <0>;
             bindings = <&kp COLON &kp E &kp EXCLAMATION &kp ENTER>;
             label = "NVIM_DISCARD";
+            wait-ms = <250>;
         };
 
         nvim_quit: nvim_quit {
