@@ -146,6 +146,9 @@ static struct battery_status_state battery_status_get_state(const zmk_event_t *e
 
 ZMK_DISPLAY_WIDGET_LISTENER(widget_battery_status, struct battery_status_state,
                             battery_status_update_cb, battery_status_get_state)
+#if IS_ENABLED(CONFIG_USB_DEVICE_STACK)
+ZMK_SUBSCRIPTION(widget_battery_status, zmk_usb_conn_state_changed);
+#endif
 
 static void set_output_status(struct zmk_widget_status *widget,
                               const struct output_status_state *state) {
@@ -173,7 +176,13 @@ static struct output_status_state output_status_get_state(const zmk_event_t *_eh
         .active_profile_bonded = !zmk_ble_active_profile_is_open(),
     };
 }
-
+ZMK_SUBSCRIPTION(widget_output_status, zmk_endpoint_changed);
+#if IS_ENABLED(CONFIG_USB_DEVICE_STACK)
+ZMK_SUBSCRIPTION(widget_output_status, zmk_usb_conn_state_changed);
+#endif
+#if defined(CONFIG_ZMK_BLE)
+ZMK_SUBSCRIPTION(widget_output_status, zmk_ble_active_profile_changed);
+#endif
 static void handle_position_state_changed(struct zmk_widget_status *widget,
                                         const struct zmk_position_state_changed *ev) {
     bool is_right = (ev->position % 12) >= 6;
@@ -226,6 +235,7 @@ static struct layer_status_state layer_status_get_state(const zmk_event_t *eh) {
 
 ZMK_DISPLAY_WIDGET_LISTENER(widget_layer_status, struct layer_status_state,
                             layer_status_update_cb, layer_status_get_state)
+ZMK_SUBSCRIPTION(widget_layer_status, zmk_layer_state_changed);
 
 int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
