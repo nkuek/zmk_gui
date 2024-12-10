@@ -134,6 +134,11 @@
             bindings = <&nvim_discard>;
             key-positions = <39 21>;
         };
+
+        Nvim_Save_All {
+            bindings = <&nvim_save_all>;
+            key-positions = <39 20 22>;
+        };
     };
 
     macros {
@@ -217,6 +222,13 @@
             #binding-cells = <0>;
             bindings = <&kp COLON &kp Q &kp EXCLAMATION &kp ENTER>;
             label = "NVIM_FORCE_QUIT";
+        };
+
+        nvim_save_all: nvim_save_all {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp COLON &kp W &kp A &kp ENTER>;
+            label = "NVIM_SAVE_ALL";
         };
     };
 
