@@ -175,6 +175,27 @@
             #binding-cells = <0>;
             bindings = <&kp LC(Q) &kp N9>;
         };
+
+        nvim_save: nvim_save {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp COLON &kp W &kp ENTER>;
+            label = "NVIM_SAVE";
+        };
+
+        nvim_discard: nvim_discard {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp COLON &kp E &kp EXCLAMATION>;
+            label = "NVIM_DISCARD";
+        };
+
+        nvim_quit: nvim_quit {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp COLON>;
+            label = "NVIM_QUIT";
+        };
     };
 
     keymap {
@@ -218,7 +239,7 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp GRAVE  &kp EXCL   &kp AT   &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET      &kp AMPS      &kp ASTRK       &kp LPAR         &kp RPAR      &kp BSPC
+&kp GRAVE  &kp EXCL   &kp AT   &kp HASH   &kp DLLR  &kp PRCNT    &kp CARET      &kp AMPS      &kp ASTRK       &kp LPAR         &kp RPAR      &kp DELETE
 &trans     &kp EQUAL  &kp SQT  &kp MINUS  &trans    &trans       &kp BACKSLASH  &kp LS(LPAR)  &kp LBKT        &kp RBKT         &kp LS(RPAR)  &kp RET
 &kp LSHFT  &trans     &trans   &trans     &trans    &trans       &trans         &trans        &kp LEFT_BRACE  &kp RIGHT_BRACE  &trans        &trans
                                &trans     &trans    &trans       &trans         &trans        &trans
