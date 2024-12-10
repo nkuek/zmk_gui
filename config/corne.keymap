@@ -136,7 +136,9 @@
 
         Nvim_Save_All {
             bindings = <&nvim_save_all>;
-            key-positions = <39 23>;
+            key-positions = <39 20 22>;
+            slow-release;
+            timeout-ms = <250>;
         };
     };
 
