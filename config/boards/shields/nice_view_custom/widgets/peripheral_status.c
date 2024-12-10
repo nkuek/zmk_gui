@@ -70,46 +70,35 @@ static void cycle_image(struct k_work *work) {
     k_work_schedule(&cycle_work, CYCLE_INTERVAL);
 }
 
-void peripheral_status_cycle_image(void) {
-    art_cycling.current_image = (art_cycling.current_image + 1) % NUM_IMAGES;
+static void handle_keycode(struct zmk_keycode_state_changed *event) {
+    if (!event->state) {
+        return;  // Only handle key press, not release
+    }
     
-    struct zmk_widget_status *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
-        lv_obj_t *art = lv_obj_get_child(widget->obj, 1);
-        lv_img_set_src(art, art_images[art_cycling.current_image]);
+    if (event->keycode == F13) {
+        art_cycling.current_image = (art_cycling.current_image + 1) % NUM_IMAGES;
+        struct zmk_widget_status *widget;
+        SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
+            lv_obj_t *art = lv_obj_get_child(widget->obj, 1);
+            lv_img_set_src(art, art_images[art_cycling.current_image]);
+        }
+    } else if (event->keycode == F14) {
+        art_cycling.auto_cycle = !art_cycling.auto_cycle;
+        if (art_cycling.auto_cycle) {
+            k_work_schedule(&cycle_work, CYCLE_INTERVAL);
+        } else {
+            k_work_cancel_delayable(&cycle_work);
+        }
     }
 }
 
-void peripheral_status_toggle_auto(void) {
-    art_cycling.auto_cycle = !art_cycling.auto_cycle;
-    if (art_cycling.auto_cycle) {
-        k_work_schedule(&cycle_work, CYCLE_INTERVAL);
-    } else {
-        k_work_cancel_delayable(&cycle_work);
-    }
+static void keycode_state_changed_listener(const zmk_event_t *eh) {
+    struct zmk_keycode_state_changed *event = as_zmk_keycode_state_changed(eh);
+    handle_keycode(event);
 }
 
-static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
-    lv_obj_t *canvas = lv_obj_get_child(widget, 0);
-
-    lv_draw_label_dsc_t label_dsc;
-    init_label_dsc(&label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_16, LV_TEXT_ALIGN_RIGHT);
-    lv_draw_rect_dsc_t rect_black_dsc;
-    init_rect_dsc(&rect_black_dsc, LVGL_BACKGROUND);
-
-    // Fill background
-    lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
-
-    // Draw battery
-    draw_battery(canvas, state);
-
-    // Draw output status
-    lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc,
-                        state->connected ? LV_SYMBOL_WIFI : LV_SYMBOL_CLOSE);
-
-    // Rotate canvas
-    rotate_canvas(canvas, cbuf);
-}
+ZMK_LISTENER(peripheral_status_keycode_listener, keycode_state_changed_listener);
+ZMK_SUBSCRIPTION(peripheral_status_keycode_listener, zmk_keycode_state_changed);
 
 static void set_battery_status(struct zmk_widget_status *widget,
                                struct battery_status_state state) {

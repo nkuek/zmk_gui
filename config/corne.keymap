@@ -29,17 +29,6 @@
             tapping-term-ms = <300>;
             flavor = "tap-preferred";
         };
-        art_cycle: art_cycle {
-            compatible = "zmk,behavior-tap";
-            #binding-cells = <0>;
-            bindings = <&art_cycle>;
-        };
-        
-        art_auto: art_auto {
-            compatible = "zmk,behavior-tap";
-            #binding-cells = <0>;
-            bindings = <&art_auto>;
-        };
     };
 
     combos {
@@ -281,7 +270,7 @@
 
         layer_3 {
             bindings = <
-&trans       &trans        &trans        &trans        &trans        &trans              &trans  &trans  &trans  &trans  &art_cycle     &art_auto
+&trans       &trans        &trans        &trans        &trans        &trans              &trans  &trans  &trans  &trans  &kp F13     &kp F14
 &trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4        &trans  &trans  &trans  &trans  &trans      &trans
 &bootloader  &trans        &trans        &trans        &trans        &trans              &trans  &trans  &trans  &trans  &sys_reset  &bootloader
                                          &trans        &trans        &kp C_PLAY_PAUSE    &trans  &trans  &trans
