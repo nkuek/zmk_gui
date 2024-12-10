@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2023 The ZMK Contributors
+ * SPDX-License-Identifier: MIT
+ */
+
 #include <zephyr/kernel.h>
 #include <zmk/battery.h>
 #include <zmk/display.h>
@@ -10,6 +15,7 @@
 #include <zmk/ble.h>
 
 #include "peripheral_status.h"
+#include "bongocat.h"
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -17,8 +23,8 @@ struct peripheral_status_state {
     bool connected;
 };
 
-static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
-    lv_obj_t *canvas = lv_obj_get_child(widget, 0);
+static void draw_status(struct zmk_widget_status *widget) {
+    lv_obj_t *canvas = lv_obj_get_child(widget->obj, 0);
 
     lv_draw_label_dsc_t label_dsc;
     init_label_dsc(&label_dsc, LVGL_FOREGROUND, &lv_font_montserrat_16, LV_TEXT_ALIGN_RIGHT);
@@ -26,11 +32,16 @@ static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_st
     init_rect_dsc(&rect_black_dsc, LVGL_BACKGROUND);
 
     lv_canvas_draw_rect(canvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE, &rect_black_dsc);
-    draw_battery(canvas, state);
-    lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc,
-                        state->connected ? LV_SYMBOL_WIFI : LV_SYMBOL_CLOSE);
+    draw_battery(canvas, &widget->state);
+    
+    // Draw connection status icon
+    if (zmk_split_bt_peripheral_is_connected()) {
+        lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc, LV_SYMBOL_WIFI);
+    } else {
+        lv_canvas_draw_text(canvas, 0, 0, CANVAS_SIZE, &label_dsc, LV_SYMBOL_CLOSE);
+    }
 
-    rotate_canvas(canvas, cbuf);
+    rotate_canvas(canvas, widget->cbuf);
 }
 
 static void set_battery_status(struct zmk_widget_status *widget,
@@ -39,7 +50,7 @@ static void set_battery_status(struct zmk_widget_status *widget,
     widget->state.charging = state.usb_present;
 #endif
     widget->state.battery = state.level;
-    draw_top(widget->obj, widget->cbuf, &widget->state);
+    draw_status(widget);
 }
 
 static void battery_status_update_cb(struct battery_status_state state) {
@@ -67,21 +78,15 @@ static struct peripheral_status_state get_state(const zmk_event_t *_eh) {
     };
 }
 
-static void set_connection_status(struct zmk_widget_status *widget,
-                                  struct peripheral_status_state state) {
-    widget->state.connected = state.connected;
-    draw_top(widget->obj, widget->cbuf, &widget->state);
-}
-
-static void output_status_update_cb(struct peripheral_status_state state) {
+static void peripheral_status_update_cb(struct peripheral_status_state state) {
     struct zmk_widget_status *widget;
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) { 
-        set_connection_status(widget, state); 
+        draw_status(widget);
     }
 }
 
 ZMK_DISPLAY_WIDGET_LISTENER(widget_peripheral_status, struct peripheral_status_state,
-                            output_status_update_cb, get_state)
+                            peripheral_status_update_cb, get_state)
                             
 ZMK_SUBSCRIPTION(widget_peripheral_status, zmk_split_peripheral_status_changed);
 ZMK_SUBSCRIPTION(widget_battery_status, zmk_battery_state_changed);
