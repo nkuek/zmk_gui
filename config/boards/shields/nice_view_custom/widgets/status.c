@@ -227,14 +227,21 @@ ZMK_SUBSCRIPTION(widget_output_status, zmk_usb_conn_state_changed);
 #if defined(CONFIG_ZMK_BLE)
 ZMK_SUBSCRIPTION(widget_output_status, zmk_ble_active_profile_changed);
 #endif
+
 static void handle_position_state_changed(struct zmk_widget_status *widget,
                                         const struct zmk_position_state_changed *ev) {
     bool is_right = (ev->position % 12) >= 6;
     
-    if (is_right) {
-        widget->state.right_pressed = ev->state;
+    // If key released, explicitly check and clear both states
+    if (!ev->state) {
+        widget->state.left_pressed = false;
+        widget->state.right_pressed = false;
     } else {
-        widget->state.left_pressed = ev->state;
+        if (is_right) {
+            widget->state.right_pressed = true;
+        } else {
+            widget->state.left_pressed = true;
+        }
     }
     
     draw_middle(widget->obj, &widget->state);
