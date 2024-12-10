@@ -113,6 +113,8 @@ static void draw_middle(lv_obj_t *widget, const struct status_state *state) {
     
     // Update bongocat animation based on key states
     const lv_img_dsc_t* frame;
+    
+    // Check both press state first
     if (state->left_pressed && state->right_pressed) {
         frame = &bongocat_both;
     } else if (state->left_pressed) {
@@ -123,7 +125,8 @@ static void draw_middle(lv_obj_t *widget, const struct status_state *state) {
         frame = &bongocat_default;
     }
 
-    if (state->current_frame != frame) {
+    // Only update if frame changed
+    if (((struct status_state *)state)->current_frame != frame) {
         lv_img_set_src(bongocat, frame);
         ((struct status_state *)state)->current_frame = frame;
     }
@@ -230,7 +233,6 @@ static void handle_position_state_changed(struct zmk_widget_status *widget,
 static void position_state_changed_cb(zmk_event_t *eh) {
     struct zmk_widget_status *widget;
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
-    if (!ev) return;
     
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
         handle_position_state_changed(widget, ev);
