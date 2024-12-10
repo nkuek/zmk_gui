@@ -23,16 +23,21 @@ extern const lv_img_dsc_t bongocat_both;
 struct status_state {
     uint8_t battery;
     bool charging;
+#if !IS_ENABLED(CONFIG_ZMK_SPLIT) || IS_ENABLED(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
     struct zmk_endpoint_instance selected_endpoint;
     int active_profile_index;
     bool active_profile_connected;
     bool active_profile_bonded;
     uint8_t layer_index;
     const char *layer_label;
+    uint8_t wpm[10];
     // Bongocat state
     bool left_pressed;
     bool right_pressed;
     const lv_img_dsc_t* current_frame;
+#else
+    bool connected;
+#endif
 };
 
 struct battery_status_state {

@@ -57,7 +57,6 @@ static void handle_position_state_changed(struct zmk_widget_bongocat *widget, co
 static void position_state_changed_cb(zmk_event_t *eh) {
     struct zmk_widget_bongocat *widget;
     const struct zmk_position_state_changed *ev = as_zmk_position_state_changed(eh);
-    if (!ev) return;
     
     SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
         handle_position_state_changed(widget, ev);
