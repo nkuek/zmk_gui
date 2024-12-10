@@ -91,7 +91,6 @@
         Nvim_Save {
             bindings = <&nvim_save>;
             key-positions = <39 22>;
-            timeout-ms = <50>;
         };
 
         Enter2 {
@@ -137,8 +136,7 @@
 
         Nvim_Save_All {
             bindings = <&nvim_save_all>;
-            key-positions = <39 20 22>;
-            timeout-ms = <50>;
+            key-positions = <39 23>;
         };
     };
 
