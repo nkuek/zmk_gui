@@ -88,8 +88,8 @@
             key-positions = <16 9>;
         };
 
-        Enter {
-            bindings = <&kp ENTER>;
+        Nvim_Save {
+            bindings = <&nvim_save>;
             key-positions = <39 22>;
             timeout-ms = <50>;
         };
@@ -118,6 +118,21 @@
         Area_Screenshot {
             bindings = <&kp LG(PERCENT)>;
             key-positions = <38 17>;
+        };
+
+        Nvim_Quit {
+            bindings = <&nvim_quit>;
+            key-positions = <39 25>;
+        };
+
+        Nvim_Force_Quit {
+            bindings = <&nvim_force_quit>;
+            key-positions = <39 38 25>;
+        };
+
+        Nvim_Discard {
+            bindings = <&nvim_discard>;
+            key-positions = <39 21>;
         };
     };
 
@@ -186,15 +201,22 @@
         nvim_discard: nvim_discard {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp COLON &kp E &kp EXCLAMATION>;
+            bindings = <&kp COLON &kp E &kp EXCLAMATION &kp ENTER>;
             label = "NVIM_DISCARD";
         };
 
         nvim_quit: nvim_quit {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp COLON>;
+            bindings = <&kp COLON &kp Q &kp ENTER>;
             label = "NVIM_QUIT";
+        };
+
+        nvim_force_quit: nvim_force_quit {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp COLON &kp Q &kp EXCLAMATION &kp ENTER>;
+            label = "NVIM_FORCE_QUIT";
         };
     };
 
