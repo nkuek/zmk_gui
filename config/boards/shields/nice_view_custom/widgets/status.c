@@ -312,32 +312,20 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
     lv_obj_set_size(widget->obj, 160, 68);
 
-    // Create top canvas for battery and connection status
+    // WPM display in top-right corner
     lv_obj_t *top = lv_canvas_create(widget->obj);
     lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
     lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
-    // Create middle section for bongocat
+    // Bongocat in center-left
     lv_obj_t *middle = lv_img_create(widget->obj);
-    lv_obj_align(middle, LV_ALIGN_TOP_LEFT, 24, 0);
+    lv_obj_align(middle, LV_ALIGN_LEFT_MID, 45, 0);
     lv_img_set_src(middle, &bongocat_default);
-    widget->state.current_frame = &bongocat_default;
-    widget->state.left_pressed = false;
-    widget->state.right_pressed = false;
 
-    // Create bottom canvas for layer status
+    // Layer status in bottom-left
     lv_obj_t *bottom = lv_canvas_create(widget->obj);
-    lv_obj_align(bottom, LV_ALIGN_TOP_LEFT, -44, 0);
+    lv_obj_align(bottom, LV_ALIGN_BOTTOM_LEFT, 0, 0);
     lv_canvas_set_buffer(bottom, widget->cbuf3, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
-
-    sys_slist_append(&widgets, &widget->node);
-
-    widget_battery_status_init();
-    widget_output_status_init();
-    widget_layer_status_init();
-
-    return 0;
-}
 
 lv_obj_t *zmk_widget_status_obj(struct zmk_widget_status *widget) {
     return widget->obj;
