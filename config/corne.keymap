@@ -131,7 +131,7 @@
 
         Nvim_Discard {
             bindings = <&nvim_discard>;
-            key-positions = <39 21>;
+            key-positions = <39 21 23>;
             require-prior-idle-ms = <250>;
         };
 
