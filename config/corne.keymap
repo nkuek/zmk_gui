@@ -30,28 +30,14 @@
             flavor = "tap-preferred";
         };
 
-        Home_Row_Modifier_Left: Home_Row_Modifier_Left {
+        Balanced_Hold_Tap: Balanced_Hold_Tap {
             compatible = "zmk,behavior-hold-tap";
-            label = "HOME_ROW_MODIFIER_LEFT";
+            label = "BALANCED_HOLD_TAP";
             bindings = <&kp>, <&kp>;
 
             #binding-cells = <2>;
-            tapping-term-ms = <100>;
-            quick-tap-ms = <200>;
-            flavor = "tap-unless-interrupted";
-            hold-trigger-key-positions = <19 20 21 22>;
-        };
-
-        Home_Row_Modifier_Right: Home_Row_Modifier_Right {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOME_ROW_MODIFIER_RIGHT";
-            bindings = <&kp>, <&kp>;
-
-            #binding-cells = <2>;
-            tapping-term-ms = <100>;
-            quick-tap-ms = <200>;
-            flavor = "tap-unless-interrupted";
-            hold-trigger-key-positions = <16 14 13 15>;
+            tapping-term-ms = <200>;
+            flavor = "balanced";
         };
     };
 
@@ -269,10 +255,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp ESCAPE      &kp B  &Tap_Hold LCTRL L  &Tap_Hold LEFT_ALT D               &Tap_Hold LEFT_GUI W  &kp Z        &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J     &kp BSPC
-&kp TAB         &kp N  &kp R              &kp T                              &kp S                 &kp G        &kp Y                    &kp H                  &kp A                  &kp E              &kp I     &kp SEMI
-&kp LEFT_SHIFT  &kp Q  &kp X              &kp M                              &kp C                 &kp V        &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH  &kp MINUS
-                                          &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 2                 &kp ENTER    &Tap_Hold_Layer 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
+&kp ESCAPE      &kp B                            &Tap_Hold LCTRL L  &Tap_Hold LEFT_ALT D               &Tap_Hold LEFT_GUI W  &kp Z        &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J                             &kp BSPC
+&kp TAB         &Balanced_Hold_Tap LEFT_SHIFT N  &kp R              &kp T                              &kp S                 &kp G        &kp Y                    &kp H                  &kp A                  &kp E              &Balanced_Hold_Tap RIGHT_SHIFT I  &kp SEMI
+&kp LEFT_SHIFT  &kp Q                            &kp X              &kp M                              &kp C                 &kp V        &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH                          &kp MINUS
+                                                                    &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 2                 &kp ENTER    &Tap_Hold_Layer 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
             >;
         };
 
