@@ -31,7 +31,7 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 static const lv_img_dsc_t *art_images[] = {
     &us,
-    &chichi
+    &chichi,
     &vy_spring,
     &us2
 };
