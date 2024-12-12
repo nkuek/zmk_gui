@@ -29,6 +29,8 @@ LV_IMG_DECLARE(chichi);
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 static const lv_img_dsc_t *art_images[] = {
+    &us,
+    &chichi,
     &us2
 };
 #define NUM_IMAGES (sizeof(art_images) / sizeof(art_images[0]))
