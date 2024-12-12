@@ -22,7 +22,6 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include "peripheral_status.h"
 
-LV_IMG_DECLARE(vy_spring);
 LV_IMG_DECLARE(us2);
 LV_IMG_DECLARE(us);
 LV_IMG_DECLARE(chichi);
@@ -30,9 +29,6 @@ LV_IMG_DECLARE(chichi);
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 static const lv_img_dsc_t *art_images[] = {
-    &us,
-    &chichi,
-    &vy_spring,
     &us2
 };
 #define NUM_IMAGES (sizeof(art_images) / sizeof(art_images[0]))
@@ -53,7 +49,7 @@ static struct art_state art_cycling = {
 
 static struct k_work_delayable cycle_work;
 
-#define CYCLE_INTERVAL K_SECONDS(5)
+#define CYCLE_INTERVAL K_MINUTES(30)
 
 static void cycle_image(struct k_work *work) {
     if (!art_cycling.auto_cycle) {
