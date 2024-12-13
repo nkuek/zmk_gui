@@ -255,10 +255,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp ESCAPE      &kp B                            &Tap_Hold LCTRL L  &Tap_Hold LEFT_ALT D               &Tap_Hold LEFT_GUI W  &kp Z           &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J                             &kp BSPC
-&kp TAB         &Balanced_Hold_Tap LEFT_SHIFT N  &kp R              &kp T                              &kp S                 &kp G           &kp Y                    &kp H                  &kp A                  &kp E              &Balanced_Hold_Tap RIGHT_SHIFT I  &kp SEMI
-&kp LEFT_SHIFT  &kp Q                            &kp X              &kp M                              &kp C                 &kp V           &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH                          &kp MINUS
-                                                                    &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 2                 &lt 1 RETURN    &Tap_Hold_Layer 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
+&kp ESCAPE      &kp B                            &Tap_Hold LCTRL L      &Tap_Hold LEFT_ALT D               &Tap_Hold LEFT_GUI W  &kp Z           &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J                             &kp BSPC
+&kp TAB         &Balanced_Hold_Tap LEFT_SHIFT N  &kp R                  &kp T                              &kp S                 &kp G           &kp Y                    &kp H                  &kp A                  &kp E              &Balanced_Hold_Tap RIGHT_SHIFT I  &kp SEMI
+&kp LEFT_SHIFT  &kp Q                            &Tap_Hold LG(LC(X)) X  &Tap_Hold LC(LG(M)) M              &kp C                 &kp V           &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH                          &kp MINUS
+                                                                        &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 2                 &lt 1 RETURN    &Tap_Hold_Layer 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
             >;
         };
 
