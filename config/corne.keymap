@@ -280,7 +280,7 @@
         const: const {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp C &kp O &kp N &kp S &kp T>;
+            bindings = <&kp C &kp O &kp N &kp S &kp T &kp SPACE>;
             label = "CONST";
         };
 
