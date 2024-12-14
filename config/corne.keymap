@@ -287,7 +287,7 @@
         arrow_function: arrow_function {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp EQUAL &kp GT>;
+            bindings = <&kp EQUAL &kp GT &kp SPACE>;
             label = "ARROW_FUNCTION";
         };
 
