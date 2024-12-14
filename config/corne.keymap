@@ -294,7 +294,7 @@
         function: function {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp F &kp U &kp N &kp C &kp T &kp I &kp O &kp N>;
+            bindings = <&kp F &kp U &kp N &kp C &kp T &kp I &kp O &kp N &kp SPACE>;
             label = "FUNCTION";
         };
     };
