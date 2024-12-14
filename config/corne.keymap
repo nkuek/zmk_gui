@@ -150,6 +150,26 @@
             key-positions = <39 20 23>;
             slow-release;
         };
+
+        const {
+            bindings = <&const>;
+            key-positions = <28 22>;
+        };
+
+        Caps_Word {
+            bindings = <&caps_word>;
+            key-positions = <28 31>;
+        };
+
+        Arrow_Function {
+            bindings = <&arrow_function>;
+            key-positions = <33 13>;
+        };
+
+        Function {
+            bindings = <&function>;
+            key-positions = <22 7>;
+        };
     };
 
     macros {
@@ -242,6 +262,41 @@
             bindings = <&kp COLON &kp W &kp A &kp ENTER>;
             label = "NVIM_SAVE_ALL";
         };
+
+        open_mouseless: open_mouseless {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LG(M))>;
+            label = "OPEN_MOUSELESS";
+        };
+
+        close_mouseless: close_mouseless {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LC(LG(X))>;
+            label = "CLOSE_MOUSELESS";
+        };
+
+        const: const {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp C &kp O &kp N &kp S &kp T>;
+            label = "CONST";
+        };
+
+        arrow_function: arrow_function {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp EQUAL &kp GT>;
+            label = "ARROW_FUNCTION";
+        };
+
+        function: function {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp F &kp U &kp N &kp C &kp T &kp I &kp O &kp N>;
+            label = "FUNCTION";
+        };
     };
 
     keymap {
@@ -255,10 +310,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp ESCAPE      &kp B                            &Tap_Hold LCTRL L      &Tap_Hold LEFT_ALT D               &Tap_Hold LEFT_GUI W  &kp Z           &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J                             &kp BSPC
-&kp TAB         &Balanced_Hold_Tap LEFT_SHIFT N  &kp R                  &kp T                              &kp S                 &kp G           &kp Y                    &kp H                  &kp A                  &kp E              &Balanced_Hold_Tap RIGHT_SHIFT I  &kp SEMI
-&kp LEFT_SHIFT  &kp Q                            &Tap_Hold LG(LC(X)) X  &Tap_Hold LC(LG(M)) M              &kp C                 &kp V           &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH                          &kp MINUS
-                                                                        &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 2                 &lt 1 RETURN    &Tap_Hold_Layer 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
+&kp ESCAPE      &kp B                            &Tap_Hold LCTRL L  &Tap_Hold LEFT_ALT D               &Tap_Hold LEFT_GUI W  &kp Z           &kp SQT                  &Tap_Hold RIGHT_GUI F  &Tap_Hold RIGHT_ALT O  &Tap_Hold RCTRL U  &kp J                             &kp BSPC
+&kp TAB         &Balanced_Hold_Tap LEFT_SHIFT N  &kp R              &kp T                              &kp S                 &kp G           &kp Y                    &kp H                  &kp A                  &kp E              &Balanced_Hold_Tap RIGHT_SHIFT I  &kp SEMI
+&kp LEFT_SHIFT  &kp Q                            &kp X              &kp M                              &kp C                 &kp V           &kp K                    &kp P                  &kp COMMA              &kp DOT            &kp FSLH                          &kp MINUS
+                                                                    &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 2                 &lt 1 RETURN    &Tap_Hold_Layer 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
             >;
         };
 
@@ -270,10 +325,10 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp GRAVE   &kp N1    &kp N2       &kp N3         &kp N4     &kp N5    &kp N6    &kp N7         &kp N8       &kp N9     &kp N0     &kp BSPC
-&trans      &kp LEFT  &kp UP       &kp DOWN       &kp RIGHT  &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &kp ENTER  &kp ENTER
-&caps_word  &trans    &kp PAGE_UP  &kp PAGE_DOWN  &trans     &trans    &trans    &kp PAGE_DOWN  &kp PAGE_UP  &trans     &trans     &trans
-                                   &trans         &trans     &trans    &trans    &trans         &trans
+&kp GRAVE  &kp N1    &kp N2       &kp N3         &kp N4     &kp N5    &kp N6    &kp N7         &kp N8       &kp N9     &kp N0     &kp BSPC
+&trans     &kp LEFT  &kp UP       &kp DOWN       &kp RIGHT  &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &kp ENTER  &kp ENTER
+&trans     &trans    &kp PAGE_UP  &kp PAGE_DOWN  &trans     &trans    &trans    &kp PAGE_DOWN  &kp PAGE_UP  &trans     &trans     &trans
+                                  &trans         &trans     &trans    &trans    &trans         &trans
             >;
         };
 
