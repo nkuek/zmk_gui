@@ -340,10 +340,10 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp GRAVE  &kp EXCL   &kp AT         &kp HASH          &kp DLLR  &kp PRCNT    &kp CARET      &kp AMPS      &kp ASTRK       &kp LPAR         &kp RPAR      &kp DELETE
-&trans     &kp EQUAL  &kp SQT        &kp MINUS         &trans    &trans       &kp BACKSLASH  &kp LS(LPAR)  &kp LBKT        &kp RBKT         &kp LS(RPAR)  &kp RET
-&kp LSHFT  &kp PLUS   &kp LESS_THAN  &kp GREATER_THAN  &trans    &trans       &trans         &trans        &kp LEFT_BRACE  &kp RIGHT_BRACE  &trans        &trans
-                                     &trans            &trans    &trans       &trans         &trans        &trans
+&kp GRAVE  &kp EXCL              &kp AT         &kp HASH                  &kp DLLR  &kp PRCNT    &kp CARET      &kp AMPS      &kp ASTRK       &kp LPAR         &kp RPAR      &kp DELETE
+&trans     &Tap_Hold PLUS EQUAL  &kp SQT        &Tap_Hold UNDER KP_MINUS  &trans    &trans       &kp BACKSLASH  &kp LS(LPAR)  &kp LBKT        &kp RBKT         &kp LS(RPAR)  &kp RET
+&kp LSHFT  &kp PLUS              &kp LESS_THAN  &kp GREATER_THAN          &trans    &trans       &trans         &trans        &kp LEFT_BRACE  &kp RIGHT_BRACE  &trans        &trans
+                                                &trans                    &trans    &trans       &trans         &trans        &trans
             >;
         };
 
