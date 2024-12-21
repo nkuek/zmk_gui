@@ -30,6 +30,9 @@ config LV_Z_MEM_POOL_SIZE
 config ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
     imply NICE_VIEW_WIDGET_STATUS
 
+config ZMK_BEHAVIOR_ART_CYCLE
+    default y if ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+
 config NICE_VIEW_WIDGET_STATUS
     bool "Custom nice!view status widget"
     select LV_FONT_MONTSERRAT_16
