@@ -43,11 +43,6 @@
             compatible = "zmk,behavior-art-cycle";
             #binding-cells = <0>;
         };
-        
-        Art_Auto: Art_Auto {
-            compatible = "zmk,behavior-art-auto";
-            #binding-cells = <0>;
-        };
     };
 
     combos {

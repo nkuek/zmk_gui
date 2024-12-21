@@ -1,0 +1,4 @@
+config ZMK_BEHAVIOR_ART_CYCLE
+    bool "Art cycle behavior support"
+    default y
+    depends on ZMK_DISPLAY_STATUS_SCREEN_CUSTOM

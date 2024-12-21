@@ -1,4 +1,4 @@
 description: Art Cycle Behavior
-compatible: "zmk,behavior-Art-Cycle"
+compatible: "zmk,behavior-art-cycle"
 
 include: zero_param.yaml

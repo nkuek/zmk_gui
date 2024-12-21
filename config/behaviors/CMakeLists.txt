@@ -1,0 +1,1 @@
+target_sources_ifdef(CONFIG_ZMK_BEHAVIOR_ART_CYCLE app PRIVATE art_cycle.c)

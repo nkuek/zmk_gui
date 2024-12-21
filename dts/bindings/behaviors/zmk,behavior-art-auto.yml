@@ -1,4 +1,0 @@
-description: Art Auto Toggle Behavior
-compatible: "zmk,behavior-Art-Auto"
-
-include: zero_param.yaml
