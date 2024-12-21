@@ -4,7 +4,7 @@
 #include <zephyr/logging/log.h>
 #include <zmk/behavior.h>
 #include <zmk/split/bluetooth/peripheral.h>
-#include <drivers/behavior/behavior_driver.h>
+#include <drivers/behavior.h>
 
 #include "art_cycle.h"
 
