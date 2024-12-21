@@ -4,12 +4,11 @@
 #include <zmk/behavior.h>
 
 struct behavior_art_cycle_config {
-    uint32_t param1;
+    char placeholder;  // Empty struct needs at least one member
 };
 
 struct behavior_art_cycle_data {
     bool pressed;
 };
 
-// Declare behavior struct
 extern const struct zmk_behavior_impl behavior_art_cycle;

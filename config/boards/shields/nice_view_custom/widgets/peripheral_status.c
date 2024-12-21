@@ -49,22 +49,38 @@ static struct art_state art_cycling = {
     .auto_cycle = true
 };
 
-static struct k_work_delayable cycle_work;
+static void cycle_image(struct k_work *work);
+static struct k_work_delayable cycle_work = Z_WORK_DELAYABLE_INITIALIZER(cycle_image);
 
 #define CYCLE_INTERVAL K_MINUTES(30)
+
+void peripheral_status_cycle_image(void) {
+    art_cycling.current_image = (art_cycling.current_image + 1) % NUM_IMAGES;
+    
+    struct zmk_widget_status *widget;
+    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
+        lv_obj_t *art = lv_obj_get_child(widget->obj, 1);
+        if (art != NULL) {
+            lv_img_set_src(art, art_images[art_cycling.current_image]);
+        }
+    }
+}
+
+void peripheral_status_toggle_auto(void) {
+    art_cycling.auto_cycle = !art_cycling.auto_cycle;
+    if (art_cycling.auto_cycle) {
+        k_work_schedule(&cycle_work, CYCLE_INTERVAL);
+    } else {
+        k_work_cancel_delayable(&cycle_work);
+    }
+}
 
 static void cycle_image(struct k_work *work) {
     if (!art_cycling.auto_cycle) {
         return;
     }
     
-    art_cycling.current_image = (art_cycling.current_image + 1) % NUM_IMAGES;
-    
-    struct zmk_widget_status *widget;
-    SYS_SLIST_FOR_EACH_CONTAINER(&widgets, widget, node) {
-        lv_obj_t *art = lv_obj_get_child(widget->obj, 1);
-        lv_img_set_src(art, art_images[art_cycling.current_image]);
-    }
+    peripheral_status_cycle_image();
     
     k_work_schedule(&cycle_work, CYCLE_INTERVAL);
 }
@@ -157,7 +173,6 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
 
     sys_slist_append(&widgets, &widget->node);
     
-    k_work_init_delayable(&cycle_work, cycle_image);
     if (art_cycling.auto_cycle) {
         k_work_schedule(&cycle_work, CYCLE_INTERVAL);
     }
@@ -168,4 +183,6 @@ int zmk_widget_status_init(struct zmk_widget_status *widget, lv_obj_t *parent) {
     return 0;
 }
 
-lv_obj_t *zmk_widget_status_obj(struct zmk_widget_status *widget) { return widget->obj; }
+lv_obj_t *zmk_widget_status_obj(struct zmk_widget_status *widget) { 
+    return widget->obj; 
+}
