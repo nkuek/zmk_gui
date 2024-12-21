@@ -1,4 +1,10 @@
-config ZMK_BEHAVIOR_ART_CYCLE
-    bool "Art cycle behavior support"
-    default y
+menuconfig ZMK_BEHAVIOR_ART_CYCLE
+    bool "Art cycle behavior"
     depends on ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
+    select ZMK_DISPLAY
+
+if ZMK_BEHAVIOR_ART_CYCLE
+    config ZMK_BEHAVIOR_ART_CYCLE_DEFAULT
+        bool "Enable art cycle by default"
+        default y
+endif
