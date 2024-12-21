@@ -4,6 +4,7 @@
 #include <zephyr/logging/log.h>
 #include <zmk/behavior.h>
 #include <zmk/split/bluetooth/peripheral.h>
+#include <drivers/behavior/behavior_driver.h>
 
 #include "art_cycle.h"
 
@@ -52,6 +53,9 @@ static const struct behavior_driver_api behavior_art_cycle_driver_api = {
 
 static struct behavior_art_cycle_data behavior_art_cycle_data;
 
-DEVICE_DT_INST_DEFINE(0, behavior_art_cycle_init, NULL, &behavior_art_cycle_data,
-                      NULL, APPLICATION, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT,
-                      &behavior_art_cycle_driver_api);
+BEHAVIOR_DT_INST_DEFINE(0,                                                    // Instance Number (Equal to 0 for behaviors that don't require multiple instances,
+                                                                              //                  Equal to n for behaviors that do make use of multiple instances)
+                        art_cycle_init, NULL,                           // Initialization Function, Power Management Device Pointer
+                        &art_cycle_data, &art_cycle_config,       // Behavior Data Pointer, Behavior Configuration Pointer (Both Optional)
+                        POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT,     // Initialization Level, Device Priority
+                        &art_cycle_driver_api);                         // API Structure
