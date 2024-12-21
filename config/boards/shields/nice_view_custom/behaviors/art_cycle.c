@@ -25,13 +25,6 @@ static int on_keymap_binding_pressed(struct zmk_behavior_binding *binding,
     
     LOG_DBG("Art cycle press");
     
-    if (zmk_split_bt_peripheral_is_connected()) {
-        LOG_DBG("Peripheral connected, cycling image");
-        peripheral_status_cycle_image();
-    } else {
-        LOG_DBG("Not a peripheral or not connected");
-    }
-    
     data->pressed = true;
     return ZMK_BEHAVIOR_OPAQUE;
 }
