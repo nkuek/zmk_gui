@@ -3,14 +3,14 @@
 
 static int art_cycle_action(struct zmk_behavior_binding *binding, struct zmk_behavior_state *state) {
     if (state->pressed) {
-        peripheral_status_cycle_image();
+        cycle_image();
     }
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
 static int art_auto_action(struct zmk_behavior_binding *binding, struct zmk_behavior_state *state) {
     if (state->pressed) {
-        peripheral_status_toggle_auto();
+        toggle_auto();
     }
     return ZMK_BEHAVIOR_OPAQUE;
 }
