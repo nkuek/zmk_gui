@@ -5,7 +5,7 @@
 #include <zmk/behavior.h>
 #include <zmk/split/bluetooth/peripheral.h>
 
-#include <behaviors/art_cycle.h>
+#include "art_cycle.h"
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
