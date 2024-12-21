@@ -1,3 +1,0 @@
-menuconfig ZMK_BEHAVIOR_ART_CYCLE
-    bool "Art cycle behavior"
-    depends on ZMK_DISPLAY_STATUS_SCREEN_CUSTOM
