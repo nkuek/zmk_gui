@@ -173,7 +173,7 @@
 
         Function {
             bindings = <&function>;
-            key-positions = <22 7>;
+            key-positions = <22 31>;
         };
     };
 
