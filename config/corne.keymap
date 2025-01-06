@@ -257,14 +257,14 @@
         nvim_force_quit: nvim_force_quit {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp COLON &kp Q &kp A &kp ENTER>;
+            bindings = <&kp ESCAPE &kp COLON &kp Q &kp A &kp ENTER>;
             label = "NVIM_FORCE_QUIT";
         };
 
         nvim_save_all: nvim_save_all {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            bindings = <&kp COLON &kp W &kp A &kp ENTER>;
+            bindings = <&kp ESCAPE &kp COLON &kp W &kp A &kp ENTER>;
             label = "NVIM_SAVE_ALL";
         };
 
