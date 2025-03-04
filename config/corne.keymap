@@ -156,11 +156,6 @@
             slow-release;
         };
 
-        const {
-            bindings = <&const>;
-            key-positions = <28 22>;
-        };
-
         Caps_Word {
             bindings = <&caps_word>;
             key-positions = <28 31>;
@@ -169,11 +164,6 @@
         Arrow_Function {
             bindings = <&arrow_function>;
             key-positions = <33 13>;
-        };
-
-        Function {
-            bindings = <&function>;
-            key-positions = <22 31>;
         };
     };
 
@@ -268,39 +258,11 @@
             label = "NVIM_SAVE_ALL";
         };
 
-        open_mouseless: open_mouseless {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(LG(M))>;
-            label = "OPEN_MOUSELESS";
-        };
-
-        close_mouseless: close_mouseless {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LC(LG(X))>;
-            label = "CLOSE_MOUSELESS";
-        };
-
-        const: const {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp C &kp O &kp N &kp S &kp T &kp SPACE>;
-            label = "CONST";
-        };
-
         arrow_function: arrow_function {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp EQUAL &kp GT &kp SPACE>;
             label = "ARROW_FUNCTION";
-        };
-
-        function: function {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp F &kp U &kp N &kp C &kp T &kp I &kp O &kp N &kp SPACE>;
-            label = "FUNCTION";
         };
     };
 
