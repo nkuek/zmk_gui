@@ -280,7 +280,7 @@
 &kp ESCAPE      &kp B                            &kp L              &kp D                              &kp C                     &kp V           &kp J                    &kp Y                  &kp O                  &kp U              &kp APOS                          &kp BSPC
 &kp TAB         &Balanced_Hold_Tap LEFT_SHIFT N  &Tap_Hold LCTRL R  &Tap_Hold LEFT_ALT T               &Tap_Hold LEFT_COMMAND S  &kp G           &kp P                    &Tap_Hold RIGHT_GUI H  &Tap_Hold RIGHT_ALT A  &Tap_Hold RCTRL E  &Balanced_Hold_Tap RIGHT_SHIFT I  &kp SEMI
 &kp LEFT_SHIFT  &kp X                            &kp Q              &kp M                              &kp W                     &kp Z           &kp K                    &kp F                  &kp COMMA              &kp DOT            &kp FSLH                          &kp MINUS
-                                                                    &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 2                     &lt 1 RETURN    &Tap_Hold_Layer 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
+                                                                    &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 4                     &lt 1 RETURN    &Tap_Hold_Layer 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
             >;
         };
 
@@ -314,12 +314,21 @@
             >;
         };
 
-        layer_3 {
+        utility_layer {
             bindings = <
 &trans       &trans        &trans        &trans             &trans           &trans              &trans  &trans  &trans  &trans  &trans      &Art_Cycle
 &trans       &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2       &bt BT_SEL 3     &bt BT_SEL 4        &trans  &trans  &trans  &trans  &trans      &trans
-&bootloader  &trans        &trans        &trans             &trans           &bt BT_CLR          &trans  &trans  &tog 0  &tog 4  &sys_reset  &bootloader
+&bootloader  &trans        &trans        &trans             &trans           &bt BT_CLR          &trans  &trans  &tog 0  &tog 5  &sys_reset  &bootloader
                                          &kp C_VOLUME_DOWN  &kp C_VOLUME_UP  &kp C_PLAY_PAUSE    &trans  &trans  &trans
+            >;
+        };
+
+        numpad_layer {
+            bindings = <
+&trans  &trans           &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &trans          &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &trans           &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_SLASH    &trans  &trans  &trans  &trans  &trans  &trans
+&trans  &kp KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_DOT      &trans  &trans  &trans  &trans  &trans  &trans
+                                          &trans           &trans           &trans          &trans  &trans  &trans
             >;
         };
 
