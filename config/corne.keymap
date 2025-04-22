@@ -187,12 +187,12 @@
 
         CmdRight {
             bindings = <&kp LG(RIGHT)>;
-            key-positions = <19 9>;
+            key-positions = <9 10>;
         };
 
         CmdLeft {
             bindings = <&kp LG(LEFT)>;
-            key-positions = <21 7>;
+            key-positions = <7 8>;
         };
     };
 
