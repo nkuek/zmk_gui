@@ -108,12 +108,6 @@
             key-positions = <39 23>;
         };
 
-        Enter2 {
-            bindings = <&kp ENTER>;
-            key-positions = <40 22>;
-            timeout-ms = <50>;
-        };
-
         Arc_Tab_1 {
             bindings = <&kp LS(LC(NUMBER_1))>;
             key-positions = <38 1>;
@@ -164,6 +158,41 @@
         Arrow_Function {
             bindings = <&arrow_function>;
             key-positions = <33 13>;
+        };
+
+        Copy {
+            bindings = <&kp LG(C)>;
+            key-positions = <26 27>;
+        };
+
+        Cut {
+            bindings = <&kp LG(X)>;
+            key-positions = <25 26>;
+        };
+
+        Paste {
+            bindings = <&kp LG(V)>;
+            key-positions = <27 28>;
+        };
+
+        AltLeft {
+            bindings = <&kp LA(LEFT)>;
+            key-positions = <21 7>;
+        };
+
+        AltRight {
+            bindings = <&kp LA(RIGHT)>;
+            key-positions = <19 9>;
+        };
+
+        CmdRight {
+            bindings = <&kp LG(RIGHT)>;
+            key-positions = <19 9>;
+        };
+
+        CmdLeft {
+            bindings = <&kp LG(LEFT)>;
+            key-positions = <21 7>;
         };
     };
 
