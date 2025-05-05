@@ -186,12 +186,12 @@
         };
 
         CmdRight {
-            bindings = <&kp END>;
+            bindings = <&kp LG(RIGHT)>;
             key-positions = <9 20>;
         };
 
         CmdLeft {
-            bindings = <&kp HOME>;
+            bindings = <&kp LG(LEFT)>;
             key-positions = <7 20>;
         };
 
