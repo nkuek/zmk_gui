@@ -177,22 +177,22 @@
 
         AltLeft {
             bindings = <&kp LA(LEFT)>;
-            key-positions = <21 7>;
+            key-positions = <7 20>;
         };
 
         AltRight {
             bindings = <&kp LA(RIGHT)>;
-            key-positions = <19 9>;
+            key-positions = <9 20>;
         };
 
         CmdRight {
             bindings = <&kp LG(RIGHT)>;
-            key-positions = <9 20>;
+            key-positions = <9 19>;
         };
 
         CmdLeft {
             bindings = <&kp LG(LEFT)>;
-            key-positions = <7 20>;
+            key-positions = <7 21>;
         };
 
         Undo {
