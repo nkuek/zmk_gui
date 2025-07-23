@@ -204,6 +204,16 @@
             bindings = <&kp LS(LG(Z))>;
             key-positions = <26 27 28>;
         };
+
+        Tab {
+            bindings = <&kp TAB>;
+            key-positions = <14 15>;
+        };
+
+        Escape {
+            bindings = <&kp ESCAPE>;
+            key-positions = <13 14>;
+        };
     };
 
     macros {
