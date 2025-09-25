@@ -321,10 +321,10 @@
             //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
 
             bindings = <
-&kp ESCAPE      &kp B             &kp L              &kp D                              &kp C                     &kp V           &kp J        &kp Y                  &kp O                  &kp U              &kp APOS           &kp BSPC
-&kp TAB         &mt LEFT_SHIFT N  &Tap_Hold LCTRL R  &Tap_Hold LEFT_ALT T               &Tap_Hold LEFT_COMMAND S  &kp G           &kp P        &Tap_Hold RIGHT_GUI H  &Tap_Hold RIGHT_ALT A  &Tap_Hold RCTRL E  &mt RIGHT_SHIFT I  &kp SEMI
-&kp LEFT_SHIFT  &kp X             &kp Q              &kp M                              &kp W                     &kp Z           &kp K        &kp F                  &kp COMMA              &kp DOT            &kp FSLH           &kp MINUS
-                                                     &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 4                     &lt 1 RETURN    &lt 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
+&kp ESCAPE      &kp B                            &kp L              &kp D                              &kp C                     &kp V           &kp J        &kp Y                  &kp O                  &kp U              &kp APOS                          &kp BSPC
+&kp TAB         &Balanced_Hold_Tap LEFT_SHIFT N  &Tap_Hold LCTRL R  &Tap_Hold LEFT_ALT T               &Tap_Hold LEFT_COMMAND S  &kp G           &kp P        &Tap_Hold RIGHT_GUI H  &Tap_Hold RIGHT_ALT A  &Tap_Hold RCTRL E  &Balanced_Hold_Tap RIGHT_SHIFT I  &kp SEMI
+&kp LEFT_SHIFT  &kp X                            &kp Q              &kp M                              &kp W                     &kp Z           &kp K        &kp F                  &kp COMMA              &kp DOT            &kp FSLH                          &kp MINUS
+                                                                    &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &mo 4                     &lt 1 RETURN    &lt 1 SPACE  &lt 2 BACKSPACE        &lt 3 DEL
             >;
         };
 
