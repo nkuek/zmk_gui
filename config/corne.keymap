@@ -55,55 +55,55 @@
         go_to_tmux_tab_1 {
             bindings = <&tmux_tab_1>;
             timeout-ms = <50>;
-            key-positions = <19 1>;
+            key-positions = <38 13>;
         };
 
         go_to_tmux_tab_2 {
             bindings = <&tmux_tab_2>;
             timeout-ms = <50>;
-            key-positions = <19 2>;
+            key-positions = <38 14>;
         };
 
         go_to_tmux_tab_3 {
             bindings = <&tmux_tab_3>;
             timeout-ms = <50>;
-            key-positions = <19 3>;
+            key-positions = <38 15>;
         };
 
         go_to_tmux_tab_4 {
             bindings = <&tmux_tab_4>;
             timeout-ms = <50>;
-            key-positions = <19 4>;
+            key-positions = <38 16>;
         };
 
         go_to_tmux_tab_5 {
             bindings = <&tmux_tab_5>;
             timeout-ms = <50>;
-            key-positions = <19 5>;
+            key-positions = <38 17>;
         };
 
         go_to_tmux_tab_6 {
             bindings = <&tmux_tab_6>;
             timeout-ms = <50>;
-            key-positions = <16 6>;
+            key-positions = <38 25>;
         };
 
         go_to_tmux_tab_7 {
             bindings = <&tmux_tab_7>;
             timeout-ms = <50>;
-            key-positions = <16 7>;
+            key-positions = <26 38>;
         };
 
         go_to_tmux_tab_8 {
             bindings = <&tmux_tab_8>;
             timeout-ms = <50>;
-            key-positions = <16 8>;
+            key-positions = <38 27>;
         };
 
         go_to_tmux_tab_9 {
             bindings = <&tmux_tab_9>;
             timeout-ms = <50>;
-            key-positions = <16 9>;
+            key-positions = <28>;
         };
 
         Nvim_Save {
@@ -123,22 +123,23 @@
 
         Screenshot {
             bindings = <&kp LG(DOLLAR)>;
-            key-positions = <38 16>;
+            key-positions = <38 4>;
         };
 
         Area_Screenshot {
             bindings = <&kp LG(PERCENT)>;
-            key-positions = <38 17>;
+            key-positions = <38 5>;
         };
 
         Nvim_Quit {
             bindings = <&nvim_quit>;
-            key-positions = <39 25>;
+            key-positions = <24 38>;
         };
 
         Nvim_Force_Quit {
             bindings = <&nvim_force_quit>;
-            key-positions = <39 38 25>;
+            key-positions = <39 19 23>;
+            slow-release;
         };
 
         Nvim_Discard {
