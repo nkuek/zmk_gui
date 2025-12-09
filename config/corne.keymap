@@ -103,7 +103,7 @@
         go_to_tmux_tab_9 {
             bindings = <&tmux_tab_9>;
             timeout-ms = <50>;
-            key-positions = <28>;
+            key-positions = <28 38>;
         };
 
         Nvim_Save {
