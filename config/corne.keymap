@@ -29,8 +29,7 @@
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            flavor = "tap-preferred";
-            quick-tap-ms = <125>;
+            flavor = "balanced";
         };
 
         Balanced_Hold_Tap: Balanced_Hold_Tap {
@@ -57,90 +56,106 @@
             bindings = <&tmux_tab_1>;
             timeout-ms = <50>;
             key-positions = <38 13>;
+            require-prior-idle-ms = <150>;
         };
 
         go_to_tmux_tab_2 {
             bindings = <&tmux_tab_2>;
             timeout-ms = <50>;
             key-positions = <38 14>;
+            require-prior-idle-ms = <150>;
         };
 
         go_to_tmux_tab_3 {
             bindings = <&tmux_tab_3>;
             timeout-ms = <50>;
             key-positions = <38 15>;
+            require-prior-idle-ms = <150>;
         };
 
         go_to_tmux_tab_4 {
             bindings = <&tmux_tab_4>;
             timeout-ms = <50>;
             key-positions = <38 16>;
+            require-prior-idle-ms = <150>;
         };
 
         go_to_tmux_tab_5 {
             bindings = <&tmux_tab_5>;
             timeout-ms = <50>;
             key-positions = <38 17>;
+            require-prior-idle-ms = <150>;
         };
 
         go_to_tmux_tab_6 {
             bindings = <&tmux_tab_6>;
             timeout-ms = <50>;
             key-positions = <38 25>;
+            require-prior-idle-ms = <150>;
         };
 
         go_to_tmux_tab_7 {
             bindings = <&tmux_tab_7>;
             timeout-ms = <50>;
             key-positions = <26 38>;
+            require-prior-idle-ms = <150>;
         };
 
         go_to_tmux_tab_8 {
             bindings = <&tmux_tab_8>;
             timeout-ms = <50>;
             key-positions = <38 27>;
+            require-prior-idle-ms = <150>;
         };
 
         go_to_tmux_tab_9 {
             bindings = <&tmux_tab_9>;
             timeout-ms = <50>;
             key-positions = <28 38>;
+            require-prior-idle-ms = <150>;
         };
 
         Nvim_Save {
             bindings = <&nvim_save>;
             key-positions = <39 23>;
+            require-prior-idle-ms = <150>;
         };
 
         Arc_Tab_1 {
             bindings = <&kp LS(LC(NUMBER_1))>;
             key-positions = <38 1>;
+            require-prior-idle-ms = <150>;
         };
 
         Arc_Tab_2 {
             bindings = <&kp LS(LC(NUMBER_2))>;
             key-positions = <38 2>;
+            require-prior-idle-ms = <150>;
         };
 
         Screenshot {
             bindings = <&kp LG(DOLLAR)>;
             key-positions = <38 4>;
+            require-prior-idle-ms = <150>;
         };
 
         Area_Screenshot {
             bindings = <&kp LG(PERCENT)>;
             key-positions = <38 5>;
+            require-prior-idle-ms = <150>;
         };
 
         Nvim_Quit {
             bindings = <&nvim_quit>;
             key-positions = <24 38>;
+            require-prior-idle-ms = <150>;
         };
 
         Nvim_Force_Quit {
             bindings = <&nvim_force_quit>;
             key-positions = <39 19 23>;
             slow-release;
+            require-prior-idle-ms = <150>;
         };
 
         Nvim_Discard {
@@ -153,6 +168,7 @@
             bindings = <&nvim_save_all>;
             key-positions = <39 20 23>;
             slow-release;
+            require-prior-idle-ms = <150>;
         };
 
         Caps_Word {
