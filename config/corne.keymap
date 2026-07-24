@@ -583,14 +583,14 @@
             // -----------------------------------------------------------------------------------------
             // |  V  |  M  |  L  |  C  |  P  |  "  |   |  B  | MAGIC |  U  |  O  |  ,  |  \\   |
             // |  S  | T/S | R/C | D/A | Y/G |  Q  |   |  F  |  N/G  | E/A | A/C | I/S |  -   |
-            // |  X  |  K  |  J  |  G  |  W  |     |   |     |   Z   |  H  |  '  |  ?  |  .   |
-            //                    | BSPC | SPC/LWR | TAB/RSE |   | SLSH/NUM | REPEAT | RET/UTIL |
+            // |  X  |  K  |  J  |  G  |  W  | UTIL|   | NUM |   Z   |  H  |  '  |  ?  |  .   |
+            //                    | BSPC | REPEAT | RET/LWR |   | SPC/LWR | TAB/RSE | SLSH/RSE |
 
             bindings = <
 &kp V  &kp M                            &kp L              &kp C               &kp P                        &kp LS(APOS)    &kp B  &magic                    &kp U                    &kp O              &kp COMMA                              &kp BACKSLASH
 &kp S  &Balanced_Hold_Tap LEFT_SHIFT T  &Tap_Hold LCTRL R  &Tap_Hold LEFT_ALT D  &Tap_Hold LEFT_COMMAND Y  &kp Q           &kp F  &Tap_Hold RIGHT_GUI N  &Tap_Hold RIGHT_ALT E  &Tap_Hold RCTRL A  &Balanced_Hold_Tap RIGHT_SHIFT I  &kp MINUS
-&kp X  &kp K                            &kp J              &kp G               &kp W                        &none           &none  &kp Z                    &kp H                    &kp APOS           &kp LS(FSLH)                          &kp DOT
-                                                               &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &Tap_Hold_Layer 2 SPACE  &Tap_Hold_Layer 3 TAB    &Tap_Hold_Layer 5 FSLH  &sturdy_repeat  &Tap_Hold_Layer 4 RETURN
+&kp X  &kp K                            &kp J              &kp G               &kp W                        &mo 4           &mo 5  &kp Z                    &kp H                    &kp APOS           &kp LS(FSLH)                          &kp DOT
+                                                               &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &sturdy_repeat  &Tap_Hold_Layer 2 RETURN    &Tap_Hold_Layer 2 SPACE  &Tap_Hold_Layer 3 TAB  &Tap_Hold_Layer 3 FSLH
             >;
         };
 
