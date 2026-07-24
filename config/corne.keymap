@@ -66,115 +66,115 @@
             dead-keys = <MAGIC_MARKER LS(MAGIC_MARKER)>;
 
             after_a {
-                trigger-keys = <A LS(A)>;
+                trigger-keys = <A LS(A) RS(A)>;
                 bindings = <&kp O &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_b {
-                trigger-keys = <B LS(B)>;
+                trigger-keys = <B LS(B) RS(B)>;
                 bindings = <&kp E &kp F &kp O &kp R &kp E &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_c_d_g_p {
-                trigger-keys = <C D G P LS(C) LS(D) LS(G) LS(P)>;
+                trigger-keys = <C D G P LS(C) LS(D) LS(G) LS(P) RS(C) RS(D) RS(G) RS(P)>;
                 bindings = <&kp Y &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_e {
-                trigger-keys = <E LS(E)>;
+                trigger-keys = <E LS(E) RS(E)>;
                 bindings = <&kp U &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_i {
-                trigger-keys = <I LS(I)>;
+                trigger-keys = <I LS(I) RS(I)>;
                 bindings = <&kp O &kp N &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_j {
-                trigger-keys = <J LS(J)>;
+                trigger-keys = <J LS(J) RS(J)>;
                 bindings = <&kp U &kp S &kp T &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_k {
-                trigger-keys = <K LS(K)>;
+                trigger-keys = <K LS(K) RS(K)>;
                 bindings = <&kp S &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_l {
-                trigger-keys = <L LS(L)>;
+                trigger-keys = <L LS(L) RS(L)>;
                 bindings = <&kp K &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_m {
-                trigger-keys = <M LS(M)>;
+                trigger-keys = <M LS(M) RS(M)>;
                 bindings = <&kp E &kp N &kp T &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_n {
-                trigger-keys = <N LS(N)>;
+                trigger-keys = <N LS(N) RS(N)>;
                 bindings = <&kp I &kp O &kp N &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_o {
-                trigger-keys = <O LS(O)>;
+                trigger-keys = <O LS(O) RS(O)>;
                 bindings = <&kp A &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_r {
-                trigger-keys = <R LS(R)>;
+                trigger-keys = <R LS(R) RS(R)>;
                 bindings = <&kp L &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_s {
-                trigger-keys = <S LS(S)>;
+                trigger-keys = <S LS(S) RS(S)>;
                 bindings = <&kp K &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_t {
-                trigger-keys = <T LS(T)>;
+                trigger-keys = <T LS(T) RS(T)>;
                 bindings = <&kp M &kp E &kp N &kp T &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_u {
-                trigger-keys = <U LS(U)>;
+                trigger-keys = <U LS(U) RS(U)>;
                 bindings = <&kp E &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_v {
-                trigger-keys = <V LS(V)>;
+                trigger-keys = <V LS(V) RS(V)>;
                 bindings = <&kp E &kp R &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_w {
-                trigger-keys = <W LS(W)>;
+                trigger-keys = <W LS(W) RS(W)>;
                 bindings = <&kp H &kp I &kp C &kp H &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_x {
-                trigger-keys = <X LS(X)>;
+                trigger-keys = <X LS(X) RS(X)>;
                 bindings = <&kp E &kp S &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
 
             after_y {
-                trigger-keys = <Y LS(Y)>;
+                trigger-keys = <Y LS(Y) RS(Y)>;
                 bindings = <&kp P &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
@@ -192,7 +192,7 @@
             };
 
             after_shifted_comma_dot {
-                trigger-keys = <LS(COMMA) LS(DOT)>;
+                trigger-keys = <LS(COMMA) LS(DOT) RS(COMMA) RS(DOT)>;
                 bindings = <&kp EQUAL &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
@@ -204,7 +204,7 @@
             };
 
             after_whitespace {
-                trigger-keys = <SPACE TAB RETURN LS(APOS) LPAR>;
+                trigger-keys = <SPACE TAB RETURN LS(APOS) RS(APOS) LPAR>;
                 bindings = <&kp T &kp H &kp E &kp MAGIC_MARKER>;
                 strict-modifiers;
             };
@@ -224,37 +224,37 @@
             bindings = <&key_repeat>;
 
             after_a {
-                trigger-keys = <A LS(A)>;
+                trigger-keys = <A LS(A) RS(A)>;
                 bindings = <&kp N &kp D>;
                 strict-modifiers;
             };
 
             after_i {
-                trigger-keys = <I LS(I)>;
+                trigger-keys = <I LS(I) RS(I)>;
                 bindings = <&kp N &kp G>;
                 strict-modifiers;
             };
 
             after_y {
-                trigger-keys = <Y LS(Y)>;
+                trigger-keys = <Y LS(Y) RS(Y)>;
                 bindings = <&kp O &kp U>;
                 strict-modifiers;
             };
 
             after_n {
-                trigger-keys = <N LS(N)>;
+                trigger-keys = <N LS(N) RS(N)>;
                 bindings = <&kp F>;
                 strict-modifiers;
             };
 
             after_b {
-                trigger-keys = <B LS(B)>;
+                trigger-keys = <B LS(B) RS(B)>;
                 bindings = <&kp E &kp C &kp A &kp U &kp S &kp E>;
                 strict-modifiers;
             };
 
             after_w {
-                trigger-keys = <W LS(W)>;
+                trigger-keys = <W LS(W) RS(W)>;
                 bindings = <&kp O &kp U &kp L &kp D>;
                 strict-modifiers;
             };
@@ -272,7 +272,7 @@
             };
 
             after_whitespace {
-                trigger-keys = <SPACE TAB RETURN LS(APOS) LPAR>;
+                trigger-keys = <SPACE TAB RETURN LS(APOS) RS(APOS) LPAR>;
                 bindings = <&kp F &kp O &kp R>;
                 strict-modifiers;
             };
