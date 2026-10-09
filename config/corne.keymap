@@ -345,6 +345,69 @@
             require-prior-idle-ms = <150>;
         };
 
+        herdr_tab_1 {
+            bindings = <&herdr N1>;
+            timeout-ms = <50>;
+            key-positions = <39 18>;
+            require-prior-idle-ms = <150>;
+        };
+
+        herdr_tab_2 {
+            bindings = <&herdr N2>;
+            timeout-ms = <50>;
+            key-positions = <39 19>;
+            require-prior-idle-ms = <150>;
+        };
+
+        herdr_tab_3 {
+            bindings = <&herdr N3>;
+            timeout-ms = <50>;
+            key-positions = <39 20>;
+            require-prior-idle-ms = <150>;
+        };
+
+        herdr_tab_4 {
+            bindings = <&herdr N4>;
+            timeout-ms = <50>;
+            key-positions = <39 21>;
+            require-prior-idle-ms = <150>;
+        };
+
+        herdr_tab_5 {
+            bindings = <&herdr N5>;
+            timeout-ms = <50>;
+            key-positions = <39 22>;
+            require-prior-idle-ms = <150>;
+        };
+
+        herdr_tab_6 {
+            bindings = <&herdr N6>;
+            timeout-ms = <50>;
+            key-positions = <39 31>;
+            require-prior-idle-ms = <150>;
+        };
+
+        herdr_tab_7 {
+            bindings = <&herdr N7>;
+            timeout-ms = <50>;
+            key-positions = <39 32>;
+            require-prior-idle-ms = <150>;
+        };
+
+        herdr_tab_8 {
+            bindings = <&herdr N8>;
+            timeout-ms = <50>;
+            key-positions = <39 33>;
+            require-prior-idle-ms = <150>;
+        };
+
+        herdr_tab_9 {
+            bindings = <&herdr N9>;
+            timeout-ms = <50>;
+            key-positions = <39 34>;
+            require-prior-idle-ms = <150>;
+        };
+
         Nvim_Save {
             bindings = <&nvim_save>;
             key-positions = <39 23>;
@@ -383,20 +446,20 @@
 
         Nvim_Force_Quit {
             bindings = <&nvim_force_quit>;
-            key-positions = <39 19 23>;
+            key-positions = <40 19 23>;
             slow-release;
             require-prior-idle-ms = <150>;
         };
 
         Nvim_Discard {
             bindings = <&nvim_discard>;
-            key-positions = <39 21 23>;
+            key-positions = <40 21 23>;
             require-prior-idle-ms = <250>;
         };
 
         Nvim_Save_All {
             bindings = <&nvim_save_all>;
-            key-positions = <39 20 23>;
+            key-positions = <40 20 23>;
             slow-release;
             require-prior-idle-ms = <150>;
         };
@@ -463,6 +526,13 @@
     };
 
     macros {
+        herdr: herdr {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&kp LC(RBKT)>, <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
+            label = "HERDR";
+        };
+
         tmux_tab_1: tmux_tab_1 {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -604,7 +674,7 @@
             bindings = <
 &kp GRAVE  &kp N1    &kp N2       &kp N3         &kp N4     &kp N5    &kp N6    &kp N7         &kp N8       &kp N9     &kp N0     &kp BSPC
 &trans     &kp LEFT  &kp UP       &kp DOWN       &kp RIGHT  &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &kp ENTER  &kp ENTER
-&trans     &trans    &kp PAGE_UP  &kp PAGE_DOWN  &trans     &trans    &trans    &kp PAGE_DOWN  &kp PAGE_UP  &trans     &trans     &trans
+&trans     &trans    &kp PAGE_UP  &kp PAGE_DOWN  &trans     &trans    &herdr COMMA  &kp PAGE_DOWN  &kp PAGE_UP  &herdr DOT  &herdr A   &herdr T
                                   &trans         &trans     &trans    &trans    &trans         &trans
             >;
         };
