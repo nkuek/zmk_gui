@@ -62,6 +62,7 @@
              * Shifted and unshifted markers are swallowed as dead keys.
              * Unsupported modifier combinations do nothing instead of expanding.
              */
+
             bindings = <&none>;
             dead-keys = <MAGIC_MARKER LS(MAGIC_MARKER)>;
 
@@ -220,7 +221,6 @@
             compatible = "zmk,behavior-adaptive-key";
             label = "STURDY_REPEAT";
             #binding-cells = <0>;
-
             bindings = <&key_repeat>;
 
             after_a {
@@ -345,69 +345,6 @@
             require-prior-idle-ms = <150>;
         };
 
-        herdr_tab_1 {
-            bindings = <&herdr N1>;
-            timeout-ms = <50>;
-            key-positions = <39 18>;
-            require-prior-idle-ms = <150>;
-        };
-
-        herdr_tab_2 {
-            bindings = <&herdr N2>;
-            timeout-ms = <50>;
-            key-positions = <39 19>;
-            require-prior-idle-ms = <150>;
-        };
-
-        herdr_tab_3 {
-            bindings = <&herdr N3>;
-            timeout-ms = <50>;
-            key-positions = <39 20>;
-            require-prior-idle-ms = <150>;
-        };
-
-        herdr_tab_4 {
-            bindings = <&herdr N4>;
-            timeout-ms = <50>;
-            key-positions = <39 21>;
-            require-prior-idle-ms = <150>;
-        };
-
-        herdr_tab_5 {
-            bindings = <&herdr N5>;
-            timeout-ms = <50>;
-            key-positions = <39 22>;
-            require-prior-idle-ms = <150>;
-        };
-
-        herdr_tab_6 {
-            bindings = <&herdr N6>;
-            timeout-ms = <50>;
-            key-positions = <39 31>;
-            require-prior-idle-ms = <150>;
-        };
-
-        herdr_tab_7 {
-            bindings = <&herdr N7>;
-            timeout-ms = <50>;
-            key-positions = <39 32>;
-            require-prior-idle-ms = <150>;
-        };
-
-        herdr_tab_8 {
-            bindings = <&herdr N8>;
-            timeout-ms = <50>;
-            key-positions = <39 33>;
-            require-prior-idle-ms = <150>;
-        };
-
-        herdr_tab_9 {
-            bindings = <&herdr N9>;
-            timeout-ms = <50>;
-            key-positions = <39 34>;
-            require-prior-idle-ms = <150>;
-        };
-
         Nvim_Save {
             bindings = <&nvim_save>;
             key-positions = <39 23>;
@@ -415,13 +352,13 @@
         };
 
         Arc_Tab_1 {
-            bindings = <&kp LS(LC(NUMBER_1))>;
+            bindings = <&kp LC(NUMBER_1)>;
             key-positions = <38 1>;
             require-prior-idle-ms = <150>;
         };
 
         Arc_Tab_2 {
-            bindings = <&kp LS(LC(NUMBER_2))>;
+            bindings = <&kp LC(NUMBER_2)>;
             key-positions = <38 2>;
             require-prior-idle-ms = <150>;
         };
@@ -529,7 +466,7 @@
         herdr: herdr {
             compatible = "zmk,behavior-macro-one-param";
             #binding-cells = <1>;
-            bindings = <&kp LC(RBKT)>, <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
+            bindings = <&kp LC(RBKT) &macro_param_1to1 &kp MACRO_PLACEHOLDER>;
             label = "HERDR";
         };
 
@@ -657,10 +594,10 @@
             //                    | BSPC | REPEAT | RET/LWR |   | SPC/LWR | TAB/RSE | SLSH/RSE |
 
             bindings = <
-&kp V  &kp M                            &kp L              &kp C               &kp P                        &kp LS(APOS)    &kp B  &magic                    &kp U                    &kp O              &kp COMMA                              &kp BACKSLASH
-&kp S  &Balanced_Hold_Tap LEFT_SHIFT T  &Tap_Hold LCTRL R  &Tap_Hold LEFT_ALT D  &Tap_Hold LEFT_COMMAND Y  &kp Q           &kp F  &Tap_Hold RIGHT_GUI N  &Tap_Hold RIGHT_ALT E  &Tap_Hold RCTRL A  &Balanced_Hold_Tap RIGHT_SHIFT I  &kp MINUS
-&kp X  &kp K                            &kp J              &kp G               &kp W                        &mo 4           &mo 5  &kp Z                    &kp H                    &kp APOS           &kp LS(FSLH)                          &kp DOT
-                                                               &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &sturdy_repeat  &Tap_Hold_Layer 2 RETURN    &Tap_Hold_Layer 2 SPACE  &Tap_Hold_Layer 3 TAB  &Tap_Hold_Layer 3 FSLH
+&kp V  &kp M                            &kp L              &kp C                              &kp P                     &kp LS(APOS)                &kp B                    &magic                 &kp U                   &kp O              &kp COMMA                         &kp BACKSLASH
+&kp S  &Balanced_Hold_Tap LEFT_SHIFT T  &Tap_Hold LCTRL R  &Tap_Hold LEFT_ALT D               &Tap_Hold LEFT_COMMAND Y  &kp Q                       &kp F                    &Tap_Hold RIGHT_GUI N  &Tap_Hold RIGHT_ALT E   &Tap_Hold RCTRL A  &Balanced_Hold_Tap RIGHT_SHIFT I  &kp MINUS
+&kp X  &kp K                            &kp J              &kp G                              &kp W                     &mo 4                       &mo 5                    &kp Z                  &kp H                   &kp APOS           &kp LS(FSLH)                      &kp DOT
+                                                           &Tap_Hold LS(LA(LCTRL)) BACKSPACE  &sturdy_repeat            &Tap_Hold_Layer 2 RETURN    &Tap_Hold_Layer 2 SPACE  &Tap_Hold_Layer 3 TAB  &Tap_Hold_Layer 3 FSLH
             >;
         };
 
@@ -672,10 +609,10 @@
             //                    | GUI |     | SPC |   | ENT |     | ALT |
 
             bindings = <
-&kp GRAVE  &kp N1    &kp N2       &kp N3         &kp N4     &kp N5    &kp N6    &kp N7         &kp N8       &kp N9     &kp N0     &kp BSPC
-&trans     &kp LEFT  &kp UP       &kp DOWN       &kp RIGHT  &trans    &kp LEFT  &kp DOWN       &kp UP       &kp RIGHT  &kp ENTER  &kp ENTER
+&kp GRAVE  &kp N1    &kp N2       &kp N3         &kp N4     &kp N5    &kp N6        &kp N7         &kp N8       &kp N9      &kp N0     &kp BSPC
+&trans     &kp LEFT  &kp UP       &kp DOWN       &kp RIGHT  &trans    &kp LEFT      &kp DOWN       &kp UP       &kp RIGHT   &kp ENTER  &kp ENTER
 &trans     &trans    &kp PAGE_UP  &kp PAGE_DOWN  &trans     &trans    &herdr COMMA  &kp PAGE_DOWN  &kp PAGE_UP  &herdr DOT  &herdr A   &herdr T
-                                  &trans         &trans     &trans    &trans    &trans         &trans
+                                  &trans         &trans     &trans    &trans        &trans         &trans
             >;
         };
 
@@ -711,6 +648,5 @@
                                           &trans           &trans           &trans          &trans  &trans  &trans
             >;
         };
-
     };
 };
